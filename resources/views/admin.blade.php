@@ -45,11 +45,35 @@
 </header>
 
 
-<div class="Container">
+<div class="container">
 
 
+<div class = "producto1">
 
+         <div class = " imagenProducto">
+            <img src="{{asset('imagenes/producto1.jpg') }}" alt=" producto1">
+         </div>
 
+         <div class = "Texto">
+              <p>
+                 Detergente liquido sabor a manzana
+              </p>
+         </div>
+
+         <div class = "precio">
+              <p>
+                $15
+              </p>
+         </div>
+
+         <div class = "botones">
+              
+                <button class = "comprar" type="submit"> <p>Comprar</p></button>
+
+                <Button class = "carritoComprar" type=" submit" > <img src="{{asset('imagenes/carrito.png') }}" alt=" carrito"></Button>
+
+         </div>
+</div>
 
 
 

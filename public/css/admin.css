@@ -3,7 +3,7 @@ body{
 
     width: 100%;
     height: 100%;
-    background-color: #c07575;
+    
 }
 
 header{
@@ -114,4 +114,97 @@ header{
     border-radius: 10px;
     background-color: white;
 }
+
+.container
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    
+}
+
+.producto1
+{
+    width: 13%;
+    height: 10%;
+    margin-left: 4%;
+    margin-top: 4%;
+    border: 1px solid black;
+    border-radius: 10px;
+    
+}
+
+.imagenProducto{
+
+    width: 100%;
+    height: 20%;
+    border-bottom: 1px solid black;
+}
+
+.imagenProducto img
+{
+    width: 80%;
+    height: 20%;
+    margin-left: 10%;
+}
+
+.Texto
+{
+    width: 100%;
+    height: 20%;
+    margin-left: 3%;
+}
+
+.texto p
+{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+}
+
+.precio
+{
+    width: 100%;
+    height: 2%;
+    margin-left: 4%;
+}
+
+.precio p
+{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.botones
+{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    
+}
+
+.botones button{
+    
+    margin-left: 4%;
+    margin-right: 5%;
+    width: 70%;
+    height: 100%;
+    margin-top: 2%;
+    margin-bottom: 5%;
+    border-radius: 10px;
+    background-color: #B4D6BE;
+
+}
+
+
+.comprar p
+{
+    width: 100%;
+    height: 70%;
+}
+
+.carritoComprar img
+{
+    width: 45%;
+    height: 100%;
+}
+
 
