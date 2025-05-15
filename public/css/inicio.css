@@ -1,0 +1,63 @@
+
+body{
+
+    width: 100%;
+    height: 100%;
+}
+
+header{
+    
+    width: 100%;
+    height: 20%;
+    
+}
+
+.cabecera{
+     width: 100%;
+     height: 10vh;
+     display: flex;
+     background-color: #B4D6BE;
+}
+
+.logo 
+{
+    width: 5%;
+    height: 100%;
+    background-color: blue;
+}
+
+.logo img
+{
+    width: 100%;
+    height: 100%;
+    margin-left: 100%;
+}
+
+.busqueda
+{
+    margin-left: 50%;
+    margin-right: 4%;
+    width:30%;
+    height: 100%;
+    background-color: aquamarine;
+
+}
+
+.busqueda form
+{
+    width: 100%;
+    height: 100%;
+   
+}
+
+.busqueda input{
+    border-radius: 10px;
+    width: 80%;
+    height: 40%;
+    margin-top: 5%;
+    margin-left: 10%;
+    background-color: white;
+    text-align: center;
+}
+
+
