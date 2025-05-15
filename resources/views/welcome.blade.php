@@ -11,9 +11,11 @@
     <body>
         <header> 
             <div class="cabecera">
+
                 <div class="logo"> 
                     <img src="{{ asset('imagenes/logo.png') }}" alt="Logo">
                 </div>
+                
                 <div class="Iconos">
                     <a href="https://www.facebook.com">
                         <img src="imagenes/icono-facebook.png" alt="Icono1" style="width: 20px; height: 20px;">

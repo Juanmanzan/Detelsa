@@ -23,6 +23,7 @@ header{
 {
     width: 5%;
     height: 100%;
+    margin-left: 30%;
     background-color: blue;
 }
 
@@ -35,7 +36,7 @@ header{
 
 .busqueda
 {
-    margin-left: 50%;
+    margin-left: 10%;
     margin-right: 4%;
     width:30%;
     height: 100%;
