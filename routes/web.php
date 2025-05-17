@@ -20,6 +20,6 @@ Route::get('/admin', function () {
         return view('admin');
 });
 
-Route::get('/inicio', function () {
-        return view('inicio');
+Route::get('/productos', function () {
+        return view('productos');
 });
