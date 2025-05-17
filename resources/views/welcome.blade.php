@@ -12,15 +12,19 @@
         <header> 
             <div class="cabecera">
 
+                <div class="Iconos">
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" >
+                        <img src="imagenes/icono-facebook.png" alt="Icono1">
+                    </a>
+                    <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer" >
+                        <img src="imagenes/icono-tiktok.png" alt="Icono2">
+                    </a>
+                </div>
+
                 <div class="logo"> 
                     <img src="{{ asset('imagenes/logo.png') }}" alt="Logo">
                 </div>
                 
-                <div class="Iconos">
-                    <a href="https://www.facebook.com">
-                        <img src="imagenes/icono-facebook.png" alt="Icono1" style="width: 20px; height: 20px;">
-                    </a>
-                </div>
             
                 <div class="busqueda"> 
                     <form action="" method="GET">
