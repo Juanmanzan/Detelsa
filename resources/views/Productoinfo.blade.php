@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informacion / producto </title>
-    <link rel="stylesheet" href="{{ asset('css/productos.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/productosinfo.css') }}">
 </head>
 <body>
     
@@ -31,7 +31,7 @@
             </p>
 
             <!-- ver mas -->
-             
+
           <div class="d-flex justify-content-center mb-4">
             <button type="button" class="btn btn-vermas">
                 Ver más <img src="{{ asset('imagenes/Vermas.png') }}" alt="Más">
