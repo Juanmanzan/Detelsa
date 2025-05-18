@@ -9,9 +9,7 @@
 <body>
 
 <header>
-
-
-<div class="coantainer"> 
+    <div class="coantainer"> 
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm"> 
 
@@ -60,14 +58,10 @@
         </div>
         </div>
 
-</div>
-
-
-   
+    </div>
 </header>
 
-
-    @yield('main_container')
+  @yield('main_container')  
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
 <footer class="py-5 bg-dark">

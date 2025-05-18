@@ -39,7 +39,6 @@
                 </div>
             </div>
         </nav>
-
         
 
         <!-- Seccion de los productos-->
@@ -251,8 +250,32 @@
             </div>
         </section>
         <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; DETELSA 2025</p></div>
+        <footer class="py-5 bg-success text-black">
+            <div class="container">
+                <div class="container px-4 text-center">
+                    <div class="row gx-3">
+                        <div class="col">
+                        <div class="p-3">
+                            <h5>Encuentranos</h5> 
+                            <hr class="border border-dark border-2 ">
+                        </div>
+                        </div>
+                        <div class="col">
+                        <div class="p-3">
+                            <h5>¿Quienes somos?</h5>
+                            <hr class="border border-dark border-2">
+                            <p class=" justify-content-center">Somos una empresa dedicada a la producción y distribución de detergentes líquidos de alta calidad, comprometida con la  limpieza, el cuidado del hogar y el respeto al medio ambiente.</p>
+                        </div>
+                        </div>
+                        <div class="col">
+                        <div class="p-3">
+                            <h5>Redes sociales</h5>
+                            <hr class="border border-black border-2">
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </footer>
     </body>
 </html>
