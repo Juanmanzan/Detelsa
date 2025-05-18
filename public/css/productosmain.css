@@ -1,0 +1,47 @@
+
+
+
+  .offcanvas {
+    border-radius: 10px;
+  }
+
+ 
+  .offcanvas-header {
+    background-color: #3CB371; /* Verde Bootstrap */
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  
+  .offcanvas-title img {
+    width: 15%;
+    height: 15%;
+    margin-right: 10px;
+  }
+
+  .logo-img {
+    width: 60px;
+    height: 60px;
+  }
+
+  @media (max-width: 991.98px) {
+    .logo-img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  /* Espaciado del contenedor en pantallas grandes */
+  .container-xl {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Opcional: estilo simple para categorías como texto plano */
+  .offcanvas-body ul li {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+  }
