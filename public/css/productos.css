@@ -1,0 +1,31 @@
+.btn-vermas {
+  background-color: transparent;
+  border: none;
+  color: #198754; /* verde bootstrap */
+  transition: all 0.3s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem; /* bordes suaves */
+  outline: none; /* quitar borde azul en foco por defecto */
+}
+
+.btn-vermas:hover,
+.btn-vermas:focus {
+  border: 1px solid #198754;
+  background-color: rgba(25, 135, 84, 0.15);
+  box-shadow: 0 8px 20px rgba(25, 135, 84, 0.4);
+  transform: translateY(-5px);
+  outline: none;
+}
+
+.btn-vermas img {
+  width: 1em;       /* Tamaño relativo al texto */
+  height: 1em;
+  margin-left: 0.3em; /* Separación entre texto e imagen */
+  vertical-align: middle; /* Alinea verticalmente con el texto */
+}

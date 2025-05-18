@@ -23,3 +23,7 @@ Route::get('/admin', function () {
 Route::get('/productos', function () {
         return view('productos');
 });
+
+Route::get('/productoinfo', function () {
+    return view('Productoinfo');
+})->name('productoinfo');
