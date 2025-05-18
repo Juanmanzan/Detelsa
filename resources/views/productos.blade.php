@@ -1,5 +1,5 @@
-@extends('layouts/main')
-@section('main_container')
+@extends('layouts/productosmain')
+@section('productosmain_container')
 <!DOCTYPE html>
 <html lang="en">
     <head>
