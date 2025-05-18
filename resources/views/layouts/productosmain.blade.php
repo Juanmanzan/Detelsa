@@ -99,13 +99,13 @@
       🧪 <span class="ms-2">Cloro</span>
     </a>
   </div>
-</div>
-
-   
+</div>   
 </header>
 
 
   @yield('productosmain_container')
+
+  
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
 <footer class="py-5 bg-dark">

@@ -10,7 +10,7 @@
         <title>Detelsa / producto</title>
     </head>
 
-    <body>
+  <body>
 
     <section class="py-5">
     <div class="container px-4 px-lg-5 mt-5">

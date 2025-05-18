@@ -1,7 +1,8 @@
-@extends('layouts/main')
-@section('main_container')
+@extends('layouts/productosmain')
+@section('productosmain_container')
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,3 +72,5 @@
         </div>
     </body>
 </html>
+
+@endsection
