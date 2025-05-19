@@ -6,6 +6,10 @@
     <title>Detelsa</title>
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/productosmain.css') }}">
+
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+
 </head>
 <body>
 
@@ -82,6 +86,7 @@
         </div>
     </div>
 </header>
+
 
 @yield('productosmain_container')
 
