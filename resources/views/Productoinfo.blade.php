@@ -77,11 +77,33 @@
   </div>
 </div>
 
+<div class="container">
+
+   <section class="py-1">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-start">
+            <div class="col mb-5">
+                <div class="card h-100" onclick="window.location='{{ route('productoinfo') }}'" style="cursor: pointer;">
+
+                    <!-- Imagen del producto -->
+                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+
+                    <!-- Detalles del producto -->
+                    <div class="card-body p-4">
+                        <div class="text-start">
+                            <h5 class="fw-bolder">Detergente líquido</h5>
+                            <p>Detergente</p>
+                            <p>$15.00</p>
+                        </div>
+                    </div>
 
 
-
-
-
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>
 
 </body>
 </html>

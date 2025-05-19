@@ -36,11 +36,12 @@
                                  alt="WhatsApp" style="width: 75%; height: 75%; object-fit: contain;">
                         </a>
 
-                        <a class="btn btn-outline-success d-flex align-items-center justify-content-center ms-4 mb-5" 
-                           href="#" onclick="event.stopPropagation(); return false;">
+                        <a class="btn btn-outline-success d-flex align-items-center justify-content-center ms-4 mb-5 btn-agregar-carrito" 
+                            href="#" onclick="event.stopPropagation(); return false;">
                             <img src="https://cdn4.iconfinder.com/data/icons/eon-ecommerce-i-1/32/cart_shop_buy_retail-512.png"
-                                 alt="Carrito" style="width: 75%; height: 75%; object-fit: contain;">
+                                alt="Carrito" style="width: 75%; height: 75%; object-fit: contain;">
                         </a>
+
                     </div>
 
                 </div>
