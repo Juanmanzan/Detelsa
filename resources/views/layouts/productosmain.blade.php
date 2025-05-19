@@ -83,25 +83,12 @@
     </div>
 </header>
 
-<!-- CONTENIDO DE LA VISTA -->
-<main>
-    @yield('productosmain_container')
-</main>
-
-<<<<<<< HEAD
 @yield('productosmain_container')
 
   
-<script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 
 <footer class="py-5 bg-dark">
     <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Detelsa 2025</p></div>
-=======
-<footer class="py-5 bg-dark mt-4">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Detelsa 2025</p>
-    </div>
->>>>>>> 35b149776cae833d9e0c8ac96e7c25e24ada2f0f
 </footer>
 
 <script src="{{ asset('javaproyecto/productosmain.js') }}"></script>
