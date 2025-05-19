@@ -29,3 +29,42 @@
   margin-left: 0.3em; /* Separación entre texto e imagen */
   vertical-align: middle; /* Alinea verticalmente con el texto */
 }
+
+/* Eliminar flechitas en Chrome, Safari, Edge */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Eliminar flechitas en Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+#ingredientes-modouso {
+  display: none;
+}
+
+.descripcion-corta {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* número de líneas que quieres mostrar */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  text-align: justify;
+}
+
+.descripcion-completa {
+  overflow: visible;
+  display: block;
+  -webkit-line-clamp: unset;
+  -webkit-box-orient: unset;
+  text-overflow: unset;
+  text-align: justify;
+}
+#descripcion-producto {
+  max-width: 100%;       /* que no supere el ancho de su contenedor */
+  box-sizing: border-box;
+  overflow-wrap: break-word; /* que las palabras largas se ajusten */
+  word-wrap: break-word;
+}
