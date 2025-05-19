@@ -16,7 +16,7 @@
     <body>
         
         <div class="container">
-                     <!--Carusel-->
+             <!--Carusel-->
             <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
                 <div class="carousel-indicators"> 
                     <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button> 
@@ -70,6 +70,18 @@
                 </button> 
             </div>
             <!--Categorias-->
+            <div class="container my-5">
+                <h2 class="mb-4">Categorías</h2>
+                <div class="scroll-grid">  
+                    <div class="card text-center scroll-item">
+                        <img src="{{ asset('imagenes/producto1.jpg') }}" alt="producto1" class="card-img-circle">
+                        <div class="card-body">
+                            <h5 class="card-title">Detergente líquido</h5>
+                            <a href="#" class="btn btn-secondary btn-sm">Ir &raquo;</a>
+                        </div>
+                    </div>
+                </div>
+            </div> 
         </div>
     </body>
 </html>

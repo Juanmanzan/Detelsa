@@ -103,7 +103,7 @@
 </header>
 
 
-  @yield('productosmain_container')
+@yield('productosmain_container')
 
   
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>

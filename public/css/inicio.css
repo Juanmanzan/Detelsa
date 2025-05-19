@@ -16,3 +16,37 @@
     border-radius: 8px;
     color: white;
 }
+
+/* Imagen circular */
+.card-img-circle {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+}
+/* Tamaño de la tarjeta */
+.card {
+    min-width: 180px;
+    max-width: 180px;
+}
+
+.scroll-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 180px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+    padding: 1rem 0;
+    scroll-behavior: smooth;
+}
+
+.scroll-grid::-webkit-scrollbar {
+   display: none;
+}
+
+.scroll-item {
+    scroll-snap-align: start;
+}
