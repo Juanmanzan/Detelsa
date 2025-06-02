@@ -44,7 +44,7 @@
                         </a>
                     </li>
                     <li class="nav-item position-relative">
-                        <a href="/carrito" class="btn btn-success btn-nav">
+                        <a href="#" class="btn btn-success btn-nav" data-bs-toggle="offcanvas" data-bs-target="#carritoMenu" aria-controls="carritoMenu">
                             🛒 <span class="ms-2">Carrito</span>
                         </a>
                          <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" style="font-size: 0.75rem;" id="cart-count">
@@ -85,6 +85,19 @@
             <a href="/categoria/cloro" class="btn btn-outline-success text-start">🧪 Cloro</a>
         </div>
     </div>
+
+        <!-- Menú Offcanvas del Carrito -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="carritoMenu" aria-labelledby="carritoMenuLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="carritoMenuLabel">🛒 Tu Carrito</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+        </div>
+        <div class="offcanvas-body overflow-auto" style="max-height: 60vh;" id="carrito-items">
+            <!-- Aquí se cargarán los productos del carrito dinámicamente -->
+            <p class="text-muted">Tu carrito está vacío.</p>
+        </div>
+    </div>
+
 </header>
 
 
@@ -92,8 +105,29 @@
 
   
 
-<footer class="py-5 bg-dark">
-    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Detelsa 2025</p></div>
+<footer class="py-5 bg-dark text-white">
+    <!--<div class="container"><p class="m-0 text-center text-white">Copyright &copy; Detelsa 2025</p></div>-->
+        <div class="container px-4 text-center">
+        <div class="row gx-3">
+            <div class="col">
+                <div class="p-3">Custom column padding</div>
+                <hr class="border border-white border-2">
+                <p class="text">Tu carrito está vacío.</p>
+
+            </div>
+            <div class="col">
+                <div class="p-3">Custom column padding</div>
+                <hr class="border border-white border-2">
+                <p class="text">Tu carrito está vacío.</p>
+
+            </div>
+            <div class="col">
+                <div class="p-3">Custom column padding</div>
+                <hr class="border border-white border-2">
+                <p class="text">Tu carrito está vacío.</p>
+            </div>
+        </div>
+    </div>
 </footer>
 
 <script src="{{ asset('javaproyecto/productosmain.js') }}"></script>
