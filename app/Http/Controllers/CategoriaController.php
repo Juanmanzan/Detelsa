@@ -30,9 +30,11 @@ class CategoriaController extends Controller
         ]);
 
         // Verificar si ya existe categoría con ese nombre (ignorando mayúsculas/minúsculas)
-        $existe = Categoria::whereRaw('LOWER(nombre) = ?', [strtolower($request->nombre)])->exists();
-
+         $existe = Categoria::whereRaw('LOWER(nombre) = ?', [strtolower($request->nombre)])->exists();
         if ($existe) {
+            if ($request->ajax()) {
+                return response()->json(['errors' => ['nombre' => ['La categoría ya existe.']]], 422);
+            }
             return redirect()->back()->withErrors(['nombre' => 'La categoría ya existe.'])->withInput();
         }
 
@@ -48,6 +50,10 @@ class CategoriaController extends Controller
         }
 
         $categoria->save();
+        
+        if ($request->ajax()) {
+            return response()->json(['success' => 'Categoría creada exitosamente'], 201);
+        }
 
         return redirect()->route('categorias.index')->with('success', 'Categoría creada exitosamente');
     }
@@ -66,10 +72,23 @@ class CategoriaController extends Controller
         $categoria = Categoria::findOrFail($id);
 
         $request->validate([
-            'nombre' => 'required|string|max:40',
+            'nombre' => 'required|string|max:40'. $categoria->id,
             'imagen' => 'nullable|image',
         ]);
 
+        // Verificar si ya existe categoría con ese nombre (ignorando mayúsculas/minúsculas)
+        $existe = Categoria::whereRaw('LOWER(nombre) = ?', [strtolower($request->nombre)])
+                        ->where('id', '!=', $id)
+                        ->exists();
+
+        if ($existe) {
+            if ($request->ajax()) {
+                return response()->json(['errors' => ['nombre' => ['La categoría ya existe.']]], 422);
+            }
+            return redirect()->back()->withErrors(['nombre' => 'La categoría ya existe.'])->withInput();
+        }
+
+        // Actualizar campos
         $categoria->nombre = $request->nombre;
 
         if ($request->hasFile('imagen')) {
@@ -85,6 +104,11 @@ class CategoriaController extends Controller
         }
 
         $categoria->save();
+
+        // AJAX response
+        if ($request->ajax()) {
+            return response()->json(['mensaje' => 'Categoría actualizada correctamente']);
+        }
 
         return redirect()->route('categorias.index')->with('success', 'Categoría actualizada correctamente');
     }
