@@ -111,8 +111,9 @@
                             <label for="editImagen">Cambiar imagen (opcional)</label>
                             <input type="file" class="form-control" id="editImagen" name="imagen" accept="image/*">
                         </div>
+                        <div id="alerta-error-nombre-editar" class="alert alert-danger mt-2" style="display:none;"></div>
                     </div>
-
+                    
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                         <button type="submit" class="btn btn-success">Actualizar Categoría</button>
@@ -153,6 +154,34 @@ $(document).ready(function() {
                     let errors = xhr.responseJSON.errors;
                     if (errors.nombre) {
                         $('#alerta-error-nombre').text(errors.nombre[0]).show();
+                    }
+                }
+            }
+        });
+    });
+
+    $('#formEditarCategoria').submit(function(e) {
+        e.preventDefault();
+
+        let formData = new FormData(this);
+        let actionUrl = $(this).attr('action');
+
+        $.ajax({
+            url: actionUrl,
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                $('#alerta-error-nombre-editar').hide();
+                $('#crearCategoriaModal').modal('hide');
+                location.reload(); // Recargar página o actualizar la lista dinámicamente
+            },
+            error: function(xhr) {
+                if (xhr.status === 422) {
+                    let errors = xhr.responseJSON.errors;
+                    if (errors.nombre) {
+                        $('#alerta-error-nombre-editar').text(errors.nombre[0]).show();
                     }
                 }
             }
