@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/productosmain.css') }}">
 
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-
+  
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>    
+    <script src="{{ asset('javaproyecto/productosmain.js') }}"></script>
 </head>
 <body>
 
@@ -103,34 +103,45 @@
 
 @yield('productosmain_container')
 
-  
 
-<footer class="py-5 bg-dark text-white">
-    <!--<div class="container"><p class="m-0 text-center text-white">Copyright &copy; Detelsa 2025</p></div>-->
-        <div class="container px-4 text-center">
-        <div class="row gx-3">
-            <div class="col">
-                <div class="p-3">Custom column padding</div>
-                <hr class="border border-white border-2">
-                <p class="text">Tu carrito está vacío.</p>
+<footer class="py-2 bg-success text-black mt-3">
+    <div class="container text-center">
+        <div class="row gx-4">
+            <!-- Encuéntranos -->
+            <div class="col-md-4 mb-2">
+                <h5>Encuéntranos</h5>
+                <hr class="border border-dark border-2 mx-auto w-55" style="border: 2px solid #000;">
+                <p class="mb-1">📍 Calle Ejemplo #123</p>
+                <p class="mb-1">📞 (555) 123-4567</p>
+                <p class="mb-1">✉️  <a href="detelsa@gmail.com">detelsa@gmail.com</a></p>
+            </div>
 
+            <!-- ¿Quiénes somos? -->
+            <div class="col-md-4 mb-2">
+                <h5>¿Quiénes somos?</h5>
+                <hr class="border border-dark border-2 mx-auto w-55">
+                <p style="text-align: justify;">
+                    Somos una empresa dedicada a la producción y distribución de detergentes líquidos de alta calidad.
+                </p>
             </div>
-            <div class="col">
-                <div class="p-3">Custom column padding</div>
-                <hr class="border border-white border-2">
-                <p class="text">Tu carrito está vacío.</p>
 
+            <!-- Redes Sociales -->
+            <div class="col-md-4 mb-2">
+                <h5>Redes sociales</h5>
+                <hr class="border border-dark border-2 mx-auto w-55">
+                <div class="d-flex justify-content-center gap-3 mt-2">
+                    <a href="#"><img src="{{ asset('imagenes/TikTok.png') }}" alt="TikTok" width="50"></a>
+                    <a href="#"><img src="{{ asset('imagenes/whatsapp.png') }}" alt="WhatsApp" width="50"></a>
+                </div>
             </div>
-            <div class="col">
-                <div class="p-3">Custom column padding</div>
-                <hr class="border border-white border-2">
-                <p class="text">Tu carrito está vacío.</p>
-            </div>
+        </div>
+        <div class="text-center mt-2 small">
+            &copy; {{ date('Y') }} Detelsa. Todos los derechos reservados.
         </div>
     </div>
 </footer>
 
-<script src="{{ asset('javaproyecto/productosmain.js') }}"></script>
+
 
 </body>
 </html>
