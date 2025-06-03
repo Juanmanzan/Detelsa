@@ -37,7 +37,13 @@ Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('ca
 Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy'])->name('categorias.destroy');
 
 
-Route::get('/crearproductos', [ProductosController::class, 'index'])->name('productos.create');
+
+Route::get('/productos', [ProductosController::class, 'index'])->name('productos.index');
+Route::get('/productos/create', [ProductosController::class, 'create'])->name('productos.create');
+Route::post('/productos', [ProductosController::class, 'store'])->name('productos.store');
+Route::get('/productos/{id}/edit', [ProductosController::class, 'edit'])->name('productos.edit');
+Route::put('/productos/{id}', [ProductosController::class, 'update'])->name('productos.update');
+Route::delete('/productos/{id}', [ProductosController::class, 'destroy'])->name('productos.destroy');
 
 //
 
@@ -48,7 +54,7 @@ Route::get('/admin', function () {
         return view('admin');
 });
 
-Route::get('/productos', function () {
+Route::get('/productosusuario', function () {
         return view('productos');
 });
 

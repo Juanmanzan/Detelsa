@@ -51,6 +51,7 @@ class CategoriaController extends Controller
 
         return redirect()->route('categorias.index')->with('success', 'Categoría creada exitosamente');
     }
+    
 
     // Mostrar formulario para editar categoría
     public function edit($id)

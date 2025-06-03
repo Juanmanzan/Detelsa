@@ -316,7 +316,7 @@ return [
         ],
         [
             'text' => 'Crear productos',
-            'url' => 'crearproductos',
+            'url' => 'productos',
             'icon' => 'fas fa-boxes',
         ],
         [
