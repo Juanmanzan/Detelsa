@@ -325,11 +325,6 @@ return [
             'icon' => 'fas fa-receipt',
         ],
         [
-            'text' => 'Estadisticas',
-            'url' => 'admin/settings',
-            'icon' => 'fas fa-chart-bar',
-        ],
-        [
             'text' => 'Perfil',
             'url' => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',

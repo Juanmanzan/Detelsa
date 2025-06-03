@@ -5,6 +5,35 @@
 @section('css')
     <link rel="stylesheet" href="/css/admincolores.css">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+   <style>
+
+        th {
+                background-color:#a7abb5;
+                color: black !important;
+        }
+
+        table td {
+            word-break: break-word;
+            white-space: normal;
+            
+        }
+
+        th, td {
+            white-space: nowrap; 
+            vertical-align: middle;
+        }
+
+        td img {
+            max-width: 300px; 
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            object-fit: contain;
+        }
+        .table td .btn {
+            white-space: nowrap; 
+        }
+    </style>
 @stop
 
 @section('content_header')
@@ -37,7 +66,11 @@
     </button>
 
     <!-- Tabla productos -->
-    <table class="table table-bordered">
+
+     <div class="table-responsive">
+            
+
+ <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Imagen</th>
@@ -53,7 +86,7 @@
         <tbody>
             @foreach ($productos as $producto)
                 <tr>
-                    <td><img src="{{ asset($producto->imagen) }}" alt="{{ $producto->nombre }}" width="100"></td>
+                    <td><img src="{{ asset($producto->imagen) }}" alt="{{ $producto->nombre }}" ></td>
                     <td>{{ $producto->nombre }}</td>
                     <td>${{ number_format($producto->precio, 2) }}</td>
                     <td>{{ $producto->categoria->nombre ?? 'Sin categoría' }}</td>
@@ -62,7 +95,7 @@
                     <td>{{ $producto->modo_de_uso }}</td>
                     <td>
                         <!-- Botón editar abre modal con datos -->
-                        <button type="button" class="btn btn-success btn-sm " data-toggle="modal"
+                        <button type="button" class="btn btn-success btn-sm mb-3  " data-toggle="modal"
                             data-target="#editarProductoModal{{ $producto->id }}">
                             Editar
                         </button>
@@ -159,6 +192,13 @@
             @endforeach
         </tbody>
     </table>
+
+     
+    </div>
+
+
+
+   
 
     <!-- Modal Crear Producto -->
     <div class="modal fade" id="crearProductoModal" tabindex="-1" aria-labelledby="crearProductoModalLabel" aria-hidden="true">

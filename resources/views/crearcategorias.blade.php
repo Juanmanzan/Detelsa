@@ -9,6 +9,32 @@
 @section('css')
     <link rel="stylesheet" href="/css/admincolores.css">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
+   <style>
+    .thead-verde th {
+        background-color:#a7abb5;
+        color: black !important;
+   }
+
+    td img {
+        max-width: 200px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+        object-fit: contain;
+    }
+
+    th, td {
+        white-space: nowrap;
+        vertical-align: middle;
+    }
+
+    .table td .btn {
+        white-space: nowrap;
+    }
+
+    </style>
+
 @stop
 
 @section('content')
@@ -52,35 +78,44 @@
         </div>
     </div>
 
-    <!-- Mostrar categorías -->
-    <div class="row">
-        @foreach ($categorias as $categoria)
-            <div class="col-md-3 mb-3">
-                <div class="card h-100" style="max-width: 250px; cursor: pointer;">
-                    <img class="card-img-top" src="{{ asset($categoria->imagen) }}" alt="{{ $categoria->nombre }}">
-                    <div class="card-body p-3">
-                        <h5 class="fw-bolder mb-0">{{ $categoria->nombre }}</h5>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between px-3 pb-3">
-                        <a href="#" 
-                            class="btn btn-outline-success btn-sm btn-editar-categoria" 
-                            data-id="{{ $categoria->id }}" 
-                            data-nombre="{{ $categoria->nombre }}" 
-                            data-imagen="{{ asset($categoria->imagen) }}" 
-                            onclick="event.stopPropagation();" 
-                            data-toggle="modal" 
+    <!-- Mostrar categorías en tabla -->
+    <div class="table-responsive">
+    <table class="table table-bordered text-center align-middle">
+            <thead class="thead-verde">
+                <tr>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($categorias as $categoria)
+                    <tr>
+                        <td>
+                            <img src="{{ asset($categoria->imagen) }}" alt="{{ $categoria->nombre }}">
+                        </td>
+                        <td style="white-space: nowrap;">{{ $categoria->nombre }}</td>
+                        <td>
+                            <a href="#"
+                            class="btn btn-success btn-sm btn-editar-categoria me-2"
+                            data-id="{{ $categoria->id }}"
+                            data-nombre="{{ $categoria->nombre }}"
+                            data-imagen="{{ asset($categoria->imagen) }}"
+                            onclick="event.stopPropagation();"
+                            data-toggle="modal"
                             data-target="#editarCategoriaModal">
-                            Editar
-                        </a>
-                        <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar esta categoría?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="event.stopPropagation();">Eliminar</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        @endforeach
+                                Editar
+                            </a>
+                            <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de eliminar esta categoría?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="event.stopPropagation();">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 
     <!-- Modal Editar Categoría -->
