@@ -1,84 +1,97 @@
+@extends('adminlte::page')
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-    <link rel="icon" type="image/png" href="{{ asset('imagenes/logo.png') }}">
-</head>
-<body>
-    
-<header > 
-       <div class = "cabecera">
+@section('title', 'Panel de Administración')
 
-             <div class = "logo"> 
-                <img src="{{asset('imagenes/logo.png') }}" alt="Logo">
+
+@section('content_header')
+    <h1>Panel de Administración Detelsa</h1>
+@stop
+
+@section('content')
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>150</h3>
+                    <p>Nuevos Usuarios</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    Más info <i class="fas fa-arrow-circle-right"></i>
+                </a>
             </div>
+        </div>
+        <!-- ./col -->
 
-            <div class = "categoria"> 
-                      <button type="submit">Crear categoria</button>
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>53%</h3>
+                    <p>Tasa de Conversión</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    Más info <i class="fas fa-arrow-circle-right"></i>
+                </a>
             </div>
-            
-            <div class = "busqueda"> 
-                   <form action = "" method = "GET">
-                      <input type="text" name="q" placeholder="Buscar...">
-                    </form>
+        </div>
+        <!-- ./col -->
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>44</h3>
+                    <p>Órdenes Pendientes</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    Más info <i class="fas fa-arrow-circle-right"></i>
+                </a>
             </div>
-            
-            <div class = "filtrosCategorias"> 
-                   <form action="" method="GET">
-                       <select name="categoria" id="categoria">
-                          <option value="" > Selecciona una categoría </option>
-                          <option value="papeleria">Papelería</option>
-                          <option value="oficina">Oficina</option>
-                         <option value="arte">Arte</option>
-                        </select>
-                        <button type="submit">Buscar</button>
-                    </form>
+        </div>
+        <!-- ./col -->
+
+        <div class="col-lg-3 col-6">
+            <div class="small-box bg-danger">
+                <div class="inner">
+                    <h3>65</h3>
+                    <p>Visitas Hoy</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <a href="#" class="small-box-footer">
+                    Más info <i class="fas fa-arrow-circle-right"></i>
+                </a>
             </div>
+        </div>
+        <!-- ./col -->
+    </div>
 
-       </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Bienvenido, Administrador</h3>
+        </div>
+        <div class="card-body">
+            Aquí puedes gestionar usuarios, pedidos, productos, reportes y más.
+        </div>
+    </div>
+@stop
 
-</header>
+@section('css')
+    <link rel="stylesheet" href="/css/admincolores.css">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+@stop
 
-
-<div class="container">
-
-
-<div class = "producto1">
-
-         <div class = " imagenProducto">
-            <img src="{{asset('imagenes/producto1.jpg') }}" alt=" producto1">
-         </div>
-
-         <div class = "Texto">
-              <p>
-                 Detergente liquido sabor a manzana
-              </p>
-         </div>
-
-         <div class = "precio">
-              <p>
-                $15
-              </p>
-         </div>
-
-         <div class = "botones">
-              
-                <button class = "comprar" type="submit"> <p>Comprar</p></button>
-
-                <Button class = "carritoComprar" type=" submit" > <img src="{{asset('imagenes/carrito.png') }}" alt=" carrito"></Button>
-
-         </div>
-</div>
-
-
-
-
-</div>
-
-</body>
-</html>
+@section('js')
+    <script>
+        console.log('¡Panel de administración cargado!');
+    </script>
+@stop
