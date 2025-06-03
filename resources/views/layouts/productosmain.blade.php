@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('css/productosmain.css') }}">
 
   
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>    
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap5.bundle.min.js') }}"></script>    
     <script src="{{ asset('javaproyecto/productosmain.js') }}"></script>
 </head>
 <body>
