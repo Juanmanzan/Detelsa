@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\PerfilController;
 
 
 
@@ -46,10 +47,20 @@ Route::put('/productos/{id}', [ProductosController::class, 'update'])->name('pro
 Route::delete('/productos/{id}', [ProductosController::class, 'destroy'])->name('productos.destroy');
 
 //
+Route::get('perfil', [PerfilController::class, 'index'])->name('perfil.index');
+Route::post('perfil', [PerfilController::class, 'store'])->name('perfil.store');
+Route::get('perfil/edit/{id}', [PerfilController::class, 'edit'])->name('perfil.edit');
+Route::put('perfil/{id}', [PerfilController::class, 'update'])->name('perfil.update');
+Route::delete('perfil/{id}', [PerfilController::class, 'destroy'])->name('perfil.destroy');
+
+
+
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+
 Route::get('/admin', function () {
         return view('admin');
 });

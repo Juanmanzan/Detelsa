@@ -325,8 +325,8 @@ return [
             'icon' => 'fas fa-receipt',
         ],
         [
-            'text' => 'Perfil',
-            'url' => 'admin/settings',
+            'text' => 'Perfil', 
+            'url' => 'perfil',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
