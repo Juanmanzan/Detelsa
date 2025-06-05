@@ -339,6 +339,13 @@ return [
             'url' => 'admin/settings',
             'icon' => 'fas fa-sign-out-alt',
         ],
+        [
+            'text' => 'Cerrar sesión',
+            'url' => 'logout',
+            'icon' => 'fas fa-sign-out-alt',
+            'topnav_right' => true,
+            'can' => 'admin.access',
+        ],
     ],
 
     /*

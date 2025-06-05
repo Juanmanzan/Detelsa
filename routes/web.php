@@ -4,7 +4,6 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductosController;
-use App\Http\Controllers\PerfilController;
 
 
 
@@ -21,9 +20,6 @@ use App\Http\Controllers\PerfilController;
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -31,20 +27,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// prueba
-Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
-Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
-Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('categorias.update');
-Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy'])->name('categorias.destroy');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
+    Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
+    Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('categorias.update');
+    Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy'])->name('categorias.destroy');
 
+    Route::get('/productos', [ProductosController::class, 'index'])->name('productos.index');
+    Route::get('/productos/create', [ProductosController::class, 'create'])->name('productos.create');
+    Route::post('/productos', [ProductosController::class, 'store'])->name('productos.store');
+    Route::get('/productos/{id}/edit', [ProductosController::class, 'edit'])->name('productos.edit');
+    Route::put('/productos/{id}', [ProductosController::class, 'update'])->name('productos.update');
+    Route::delete('/productos/{id}', [ProductosController::class, 'destroy'])->name('productos.destroy');
+});
 
-
-Route::get('/productos', [ProductosController::class, 'index'])->name('productos.index');
-Route::get('/productos/create', [ProductosController::class, 'create'])->name('productos.create');
-Route::post('/productos', [ProductosController::class, 'store'])->name('productos.store');
-Route::get('/productos/{id}/edit', [ProductosController::class, 'edit'])->name('productos.edit');
-Route::put('/productos/{id}', [ProductosController::class, 'update'])->name('productos.update');
-Route::delete('/productos/{id}', [ProductosController::class, 'destroy'])->name('productos.destroy');
 
 //
 Route::get('perfil', [PerfilController::class, 'index'])->name('perfil.index');
@@ -63,7 +59,7 @@ Route::get('/', function () {
 
 Route::get('/admin', function () {
         return view('admin');
-});
+})->middleware(['auth', 'verified'])->name('admin');
 
 Route::get('/productosusuario', function () {
         return view('productos');
@@ -72,5 +68,7 @@ Route::get('/productosusuario', function () {
 Route::get('/productoinfo', function () {
     return view('Productoinfo');
 })->name('productoinfo');
+
+
 
 require __DIR__.'/auth.php';
