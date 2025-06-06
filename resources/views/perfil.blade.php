@@ -3,203 +3,272 @@
 @section('title', 'Perfil')
 
 @section('css')
-    <link rel="stylesheet" href="/css/admincolores.css">
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+<link rel="stylesheet" href="/css/admincolores.css">
+<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+<style>
+    .tarjeta-prioridad-1 {
+        width: 50%;
+        margin-left: 10%;
+        margin-bottom: 2rem;
+        border: 1px solid #ccc;
+        padding: 20px;
+        background-color: transparent;
+        border-radius: 10px;
+    }
 
-    <style>
-        .card-body h5,
-        .card-body h6 {
-            font-weight: bold;
-        }
+    .titulo-prioridad-1 {
+        font-weight: bold;
+    }
 
-        .card-body img {
-            max-width: 30%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-        }
+    .contenido-prioridad-1 {
+        display: flex;
+        align-items: flex-start;
+        margin-top: 10px;
+    }
 
-        @media (max-width: 767px) {
-            .card-body img {
-                max-width: 70%;
-            }
-        }
-       
-        .tarjeta-hover {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    .contenido-prioridad-1 img {
+        width: 300px;
+        height: 200px;
+        object-fit: cover;
+        margin-right: 15px;
+    }
 
-        .tarjeta-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-    </style>
-@stop
+    .contenido-prioridad-1 p {
+        font-size: 1.5rem;
+        flex: 1;
+    }
 
-@section('js')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    .botones {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .contenedor-prioridad-2 {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-between;
+        margin: 30px 10%;
+    }
+
+    .tarjeta-prioridad-2 {
+        width: 30%;
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 15px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tarjeta-prioridad-2 img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 4px;
+        margin-bottom: 10px;
+    }
+
+    .tarjeta-prioridad-2 h5 {
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .tarjeta-prioridad-2 p {
+        font-size: 1.3rem;
+        text-align: justify;
+    }
+
+    .tarjeta-prioridad-1:hover,
+    .tarjeta-prioridad-2:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+</style>
 @stop
 
 @section('content_header')
-    <h1>Perfil</h1>
+<h1>Perfil</h1>
 @stop
 
 @section('content')
 
-<!-- Botón para abrir el modal de creación -->
-<div class="mb-4 text-end">
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#crearContenidoModal">
-        Crear contenido
-    </button>
+@if(session('success'))
+<div class="mb-2" id="mensaje-exito" style="background-color: #d4edda; padding: 10px; border-radius: 5px; color: #155724;">
+    {{ session('success') }}
 </div>
+<script>
+    setTimeout(() => {
+        const mensaje = document.getElementById('mensaje-exito');
+        if (mensaje) {
+            mensaje.style.transition = "opacity 0.5s ease";
+            mensaje.style.opacity = '0';
+            setTimeout(() => mensaje.remove(), 500);
+        }
+    }, 3000);
+</script>
+@endif
+
+<button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#crearContenidoModal">
+    Crear contenido
+</button>
 
 <!-- Modal Crear Contenido -->
 <div class="modal fade" id="crearContenidoModal" tabindex="-1" aria-labelledby="crearContenidoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <form action="{{ route('perfil.store') }}" method="POST" enctype="multipart/form-data">
+            <form id="formCrearContenido" action="{{ route('perfil.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
-                    <h5 class="modal-title" id="crearContenidoModalLabel">Crear nuevo contenido</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    <h5 class="modal-title">Crear Contenido</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+
                 <div class="modal-body">
-                    <!-- Campos del formulario -->
-                    <div class="mb-3">
-                        <label class="form-label small">Prioridad</label>
+                    <div class="form-group">
+                        <label>Prioridad</label>
                         <select name="prioridad" class="form-control form-control-sm" required>
                             <option value="" disabled selected>Seleccione una prioridad</option>
                             <option value="1">Alta</option>
-                            <option value="2">Media</option>
-                            <option value="3">Baja</option>
+                            <option value="2">Baja</option>
                         </select>
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label small">Título</label>
                         <input type="text" name="titulo" class="form-control form-control-sm" maxlength="40" required>
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label small">Contenido</label>
                         <textarea name="contenido" class="form-control form-control-sm" maxlength="1000" required></textarea>
                     </div>
+
                     <div class="mb-3">
-                        <label class="form-label small">Imagen (opcional)</label>
+                        <label class="form-label small">Imagen</label>
                         <input type="file" name="imagen" class="form-control form-control-sm">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label small">Posición de la imagen</label>
-                        <select name="posicionimg" class="form-control form-control-sm" required>
-                            <option value="" disabled selected>Seleccione la posición</option>
-                            <option value="0">Arriba del contenido</option>
-                            <option value="1">Al lado del contenido</option>
-                        </select>
-                    </div>
                 </div>
+
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Crear Contenido</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<!-- LISTADO DE CONTENIDO -->
-<div class="row">
-@foreach ($contenido->sortBy('prioridad') as $item)
-    @php
-        $tituloTag = $item->prioridad == 1 ? 'h5' : ($item->prioridad == 2 ? 'h6' : 'p');
-        $claseTexto = 'text-wrap small';
-    @endphp
-
-    <div class="col-md-6 mb-4">
-        <div class="card border shadow-sm tarjeta-hover h-100">
-            <div class="card-body">
-                <div class="row">
-                    @if ($item->imagen && $item->posicionimg == 1)
-                        <div class="col-md-4 text-center mb-2 mb-md-0">
-                            <img src="{{ asset($item->imagen) }}" class="img-fluid rounded" style="max-width: 40%;" alt="Imagen">
-                        </div>
-                    @endif
-
-                    <div class="{{ $item->imagen && $item->posicionimg == 1 ? 'col-md-8' : 'col-12' }}">
-                        <<?php echo $tituloTag; ?> class="fw-bold">{{ $item->titulo }}</<?php echo $tituloTag; ?>>
-                        <p class="{{ $claseTexto }}">{{ $item->contenido }}</p>
-                    </div>
-
-                    @if ($item->imagen && $item->posicionimg == 0)
-                        <div class="col-12 mt-2 text-center">
-                            <img src="{{ asset($item->imagen) }}" class="img-fluid rounded" style="max-width: 40%;" alt="Imagen">
-                        </div>
-                    @endif
-                </div>
-
-                <!-- BOTONES -->
-                <div class="mt-3 text-end">
-                    <!-- Editar -->
-                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#editarContenidoModal{{ $item->id }}">Editar</button>
-
-                    <!-- Eliminar -->
-                    <form action="{{ route('perfil.destroy', $item->id) }}" method="POST" class="d-inline" onsubmit="return confirm('¿Estás seguro de eliminar este contenido?')">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-sm btn-danger">Eliminar</button>
-                    </form>
-                </div>
-            </div>
+<!-- Tarjetas prioridad 1 -->
+@foreach ($contenido as $item)
+    @if($item->prioridad == 1)
+    <div class="tarjeta-prioridad-1">
+        <h3 class="titulo-prioridad-1">{{ $item->titulo }}</h3>
+        <div class="contenido-prioridad-1">
+            @if ($item->imagen)
+            <img src="{{ asset($item->imagen) }}" alt="{{ $item->titulo }}">
+            @endif
+            <p>{{ $item->contenido }}</p>
+        </div>
+        <div class="botones">
+            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarContenidoModal{{ $item->id }}">Editar</button>
+            <form action="{{ route('perfil.destroy', $item->id) }}" method="POST" style="display:inline-block;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar este contenido?')">Eliminar</button>
+            </form>
         </div>
     </div>
+    @endif
+@endforeach
 
-    <!-- Modal Editar Contenido -->
-    <div class="modal fade" id="editarContenidoModal{{ $item->id }}" tabindex="-1" aria-labelledby="editarContenidoModalLabel{{ $item->id }}" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <form action="{{ route('perfil.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+<!-- Tarjetas prioridad 2 -->
+<div class="contenedor-prioridad-2">
+    @foreach ($contenido as $item)
+        @if($item->prioridad == 2)
+        <div class="tarjeta-prioridad-2">
+            <h5>{{ $item->titulo }}</h5>
+            @if ($item->imagen)
+            <img src="{{ asset($item->imagen) }}" alt="{{ $item->titulo }}">
+            @endif
+            <p>{{ $item->contenido }}</p>
+            <div class="botones">
+                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarContenidoModal{{ $item->id }}">Editar</button>
+                <form action="{{ route('perfil.destroy', $item->id) }}" method="POST" style="display:inline-block;">
                     @csrf
-                    @method('PUT')
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editarContenidoModalLabel{{ $item->id }}">Editar contenido</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label class="form-label small">Prioridad</label>
-                            <select name="prioridad" class="form-control form-control-sm" required>
-                                <option value="1" {{ $item->prioridad == 1 ? 'selected' : '' }}>Alta</option>
-                                <option value="2" {{ $item->prioridad == 2 ? 'selected' : '' }}>Media</option>
-                                <option value="3" {{ $item->prioridad == 3 ? 'selected' : '' }}>Baja</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small">Título</label>
-                            <input type="text" name="titulo" class="form-control form-control-sm" maxlength="40" value="{{ $item->titulo }}" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small">Contenido</label>
-                            <textarea name="contenido" class="form-control form-control-sm" maxlength="1000" required>{{ $item->contenido }}</textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small">Imagen (opcional)</label>
-                            <input type="file" name="imagen" class="form-control form-control-sm">
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small">Posición de la imagen</label>
-                            <select name="posicionimg" class="form-control form-control-sm" required>
-                                <option value="0" {{ $item->posicionimg == 0 ? 'selected' : '' }}>Arriba del contenido</option>
-                                <option value="1" {{ $item->posicionimg == 1 ? 'selected' : '' }}>Al lado del contenido</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success">Guardar cambios</button>
-                    </div>
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar este contenido?')">Eliminar</button>
                 </form>
             </div>
         </div>
-    </div>
-@endforeach
+        @endif
+    @endforeach
 </div>
 
-@stop
+<!-- Modales de edición -->
+@foreach ($contenido as $item)
+<div class="modal fade" id="editarContenidoModal{{ $item->id }}" tabindex="-1" aria-labelledby="editarContenidoModalLabel{{ $item->id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('perfil.update', $item->id) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
 
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Contenido</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Prioridad</label>
+                        <select name="prioridad" class="form-control form-control-sm" required>
+                            <option value="1" {{ $item->prioridad == 1 ? 'selected' : '' }}>Alta</option>
+                            <option value="2" {{ $item->prioridad == 2 ? 'selected' : '' }}>Baja</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small">Título</label>
+                        <input type="text" name="titulo" class="form-control form-control-sm" maxlength="40" value="{{ $item->titulo }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small">Contenido</label>
+                        <textarea name="contenido" class="form-control form-control-sm" maxlength="1000" required>{{ $item->contenido }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small">Imagen</label>
+                        <input type="file" name="imagen" class="form-control form-control-sm">
+                        @if ($item->imagen)
+                        <div class="mt-2">
+                            <img src="{{ asset($item->imagen) }}" style="width: 100px; border-radius: 5px;" alt="Imagen actual">
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" name="eliminar_imagen" value="1" id="eliminarImagen{{ $item->id }}">
+                                <label class="form-check-label" for="eliminarImagen{{ $item->id }}">Eliminar imagen actual</label>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endforeach
+@stop

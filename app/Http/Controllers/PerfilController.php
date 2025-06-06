@@ -25,14 +25,12 @@ class PerfilController extends Controller
             'titulo' => 'required|string|max:40',
             'contenido' => 'required|string|max:1000',
             'prioridad' => 'required|integer',
-            'posicionimg' => 'required|boolean',
         ]);
 
         $contenido = new Perfil();
         $contenido->titulo = $request->titulo;
         $contenido->contenido = $request->contenido;
         $contenido->prioridad = $request->prioridad;
-        $contenido->posicionimg = $request->posicionimg;
 
         if ($request->hasFile('imagen')) {
             $file = $request->file('imagen');
@@ -56,24 +54,20 @@ class PerfilController extends Controller
     {
         $contenido = Perfil::findOrFail($id);
 
-        $request->validate([
-            'imagen' => 'nullable|image',
-            'titulo' => 'required|string|max:40',
-            'contenido' => 'required|string|max:1000',
-            'prioridad' => 'required|integer',
-            'posicionimg' => 'required|boolean',
-        ]);
-
         $contenido->titulo = $request->titulo;
         $contenido->contenido = $request->contenido;
         $contenido->prioridad = $request->prioridad;
-        $contenido->posicionimg = $request->posicionimg;
 
-        if ($request->hasFile('imagen')) {
-            if ($contenido->imagen && file_exists(public_path($contenido->imagen))) {
+        // Eliminar imagen si se seleccionó el checkbox
+        if ($request->has('eliminar_imagen') && $contenido->imagen) {
+            if (file_exists(public_path($contenido->imagen))) {
                 unlink(public_path($contenido->imagen));
             }
+            $contenido->imagen = null;
+        }
 
+        // Subir nueva imagen si se seleccionó
+        if ($request->hasFile('imagen')) {
             $file = $request->file('imagen');
             $nombreArchivo = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('imagenes/perfil'), $nombreArchivo);
@@ -82,7 +76,7 @@ class PerfilController extends Controller
 
         $contenido->save();
 
-        return redirect()->route('perfil.index')->with('success', 'Contenido actualizado correctamente');
+        return redirect()->back()->with('success', 'Contenido actualizado correctamente');
     }
 
     public function destroy($id)

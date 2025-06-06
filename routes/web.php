@@ -5,8 +5,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\PerfilController;
+<<<<<<< HEAD
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\InformacionController;
+=======
+>>>>>>> 2184c56810b7304dd56d5bf366f006a04c5ab797
 
 
 
@@ -42,6 +45,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/productos/{id}/edit', [ProductosController::class, 'edit'])->name('productos.edit');
     Route::put('/productos/{id}', [ProductosController::class, 'update'])->name('productos.update');
     Route::delete('/productos/{id}', [ProductosController::class, 'destroy'])->name('productos.destroy');
+<<<<<<< HEAD
+=======
+    
+    Route::get('perfil', [PerfilController::class, 'index'])->name('perfil.index');
+    Route::post('perfil', [PerfilController::class, 'store'])->name('perfil.store');
+    Route::get('perfil/edit/{id}', [PerfilController::class, 'edit'])->name('perfil.edit');
+    Route::put('perfil/{id}', [PerfilController::class, 'update'])->name('perfil.update');
+    Route::delete('perfil/{id}', [PerfilController::class, 'destroy'])->name('perfil.destroy');
+
+});
+>>>>>>> 2184c56810b7304dd56d5bf366f006a04c5ab797
 
     Route::get('perfil', [PerfilController::class, 'index'])->name('perfil.index');
     Route::post('perfil', [PerfilController::class, 'store'])->name('perfil.store');
@@ -49,6 +63,13 @@ Route::middleware(['auth'])->group(function () {
     Route::put('perfil/{id}', [PerfilController::class, 'update'])->name('perfil.update');
     Route::delete('perfil/{id}', [PerfilController::class, 'destroy'])->name('perfil.destroy');
 
+<<<<<<< HEAD
+=======
+
+
+Route::get('/', function () {
+    return view('welcome');
+>>>>>>> 2184c56810b7304dd56d5bf366f006a04c5ab797
 });
 
 
@@ -66,7 +87,6 @@ Route::post('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar']);
 Route::get('/carrito/contador', [CarritoController::class, 'contador']);
 Route::get('/carrito/mostrar', [CarritoController::class, 'mostrar']);
 Route::post('/carrito/vaciar', [CarritoController::class, 'vaciar']);
-
 
 
 require __DIR__.'/auth.php';

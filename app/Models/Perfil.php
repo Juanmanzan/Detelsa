@@ -15,7 +15,6 @@ class Perfil extends Model
         'titulo',
         'contenido',
         'imagen',
-        'posicionimg'
 
     ];
 }
