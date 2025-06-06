@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('titulo');
             $table->text('contenido');
             $table->string('imagen')->nullable();
-            $table->boolean('posicionimg');
             $table->timestamps();
             
         });
