@@ -336,7 +336,7 @@ return [
         ],
         [
             'text' => 'Salir',
-            'url' => 'admin/settings',
+            'url' => '/',
             'icon' => 'fas fa-sign-out-alt',
         ],
         [

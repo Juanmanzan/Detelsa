@@ -10,6 +10,10 @@
   
     <script src="{{ asset('vendor/bootstrap/js/bootstrap5.bundle.min.js') }}"></script>    
     <script src="{{ asset('javaproyecto/productosmain.js') }}"></script>
+    <script src="{{ asset('javaproyecto/carrito.js') }}"></script>
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 <body>
 
@@ -50,8 +54,6 @@
                          <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" style="font-size: 0.75rem;" id="cart-count">
                           0
                         </span>
-
-
                     </li>
                 </ul>
             </div>
@@ -92,9 +94,8 @@
             <h5 class="offcanvas-title" id="carritoMenuLabel">🛒 Tu Carrito</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
         </div>
-        <div class="offcanvas-body overflow-auto" style="max-height: 60vh;" id="carrito-items">
-            <!-- Aquí se cargarán los productos del carrito dinámicamente -->
-            <p class="text-muted">Tu carrito está vacío.</p>
+        <div class="offcanvas-body" id="carritoContenido">
+            <p>Tu carrito está vacío.</p>
         </div>
     </div>
 
