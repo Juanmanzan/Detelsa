@@ -70,16 +70,19 @@
                 </button> 
             </div>
             <!--Categorias-->
+            
             <div class="container my-5">
                 <h2 class="mb-4">Categorías</h2>
                 <div class="scroll-grid">  
-                    <div class="card text-center scroll-item">
-                        <img src="{{ asset('imagenes/producto1.jpg') }}" alt="producto1" class="card-img-circle">
-                        <div class="card-body">
-                            <h5 class="card-title">Detergente líquido</h5>
-                            <a href="#" class="btn btn-secondary btn-sm">Ir &raquo;</a>
+                    @foreach ($categorias as $categoria)
+                        <div class="card text-center scroll-item">
+                            <img src="{{ $categoria->imagen}}" alt="categoria1" class="card-img-circle">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $categoria->nombre }}</h5>
+                                <a href="#" class="btn btn-secondary btn-sm">Ir &raquo;</a>
+                            </div>
                         </div>
-                    </div>
+                     @endforeach
                 </div>
             </div> 
         </div>        
