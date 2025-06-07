@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informacion / producto </title>
+    <title>Informacion / </title>
     <link rel="stylesheet" href="{{ asset('css/productosinfo.css') }}">
     <script src="{{ asset('javaproyecto/productosinfo.js') }}"></script>
 </head>
@@ -14,26 +14,21 @@
     
 
 <div class="container my-5">
+
   <div class="row align-items-start">
 
     <!-- Imagen -->
     <div class="col-md-4" style="margin-left: 3%;">
-      <img src="{{ asset('imagenes/producto1.jpg') }}" alt="Producto" class="img-fluid rounded">
-
+      <img src="{{ asset($producto->imagen) }}" alt="{{ $producto->nombre }}" class="img-fluid rounded mb-3" id="imagen-producto">
       <!-- Aquí se moverá la tabla del carrito cuando se haga clic en "Ver más" -->
       <div id="contenedor-tabla-movil"></div>
     </div>
 
     <!-- Información -->
     <div class="col-md-6">
-      <h4 class="fw-bold">Detergente líquido</h4>
+      <h4 class="fw-bold">{{ $producto->nombre }}</h4>
       <p id="descripcion-producto" class="descripcion-corta">
-       Para la limpieza profunda de todo tipo de pisos: cerámica, porcelanato, vinilo, mármol y granito. Su poderosa acción desinfectante elimina bacterias y residuos difíciles, 
-       dejando las superficies relucientes y con un agradable aroma a frescura. Ideal para uso doméstico, institucional e industrial. Este detergente líquido ha sido 
-       especialmente formulado para ofrecer una limpieza eficaz sin dañar las superficies delicadas, asegurando una higiene óptima en cada aplicación. Además, 
-       su fórmula biodegradable y respetuosa con el medio ambiente contribuye a la conservación del entorno, haciendo de este producto una opción segura y responsable para el 
-       hogar y los espacios comerciales. Con su agradable fragancia, no solo limpia sino que también refresca el ambiente, proporcionando una sensación de limpieza y bienestar 
-       duradera. Perfecto para quienes buscan calidad, eficacia y cuidado en un solo producto.
+       {{ $producto->descripcion }}
       </p>
 
       <div class="d-flex justify-content-center mb-4">
@@ -47,30 +42,23 @@
       <div id="ingredientes-modouso" class="mt-4" style="display: none; margin-left: 1.5rem;">
         <h5 class="fw-bold">Ingredientes</h5>
         <ul>
-          <li>Tensioactivos aniónicos</li>
-          <li>Cloruro de benzalconio</li>
-          <li>Solventes biodegradables</li>
-          <li>Fragancia concentrada</li>
-          <li>Colorante hidrosoluble</li>
-          <li>Agua desmineralizada</li>
+          @foreach(explode(',', $producto->ingredientes) as $ingrediente)
+            <li>{{ trim($ingrediente) }}</li>
+          @endforeach
         </ul>
         <h5>Modo de uso</h5>
-        <p>Diluir 100 ml del detergente en 5 litros de agua. Aplicar con trapeador o paño húmedo y dejar secar. No necesita enjuague.</p>
+        <p>{{ $producto->modo_de_uso }}</p>
       </div>
 
       <!-- Tabla carrito (botones +, -, input, carrito y precio) que se mueve -->
       <div id="tabla-carrito" class="d-flex align-items-center justify-content-between border-top border-bottom py-3 px-2">
-        <div class="d-flex align-items-center">
-          <button type="button" class="btn btn-outline-secondary me-2" id="btn-mas">+</button>
-          <input type="number" id="cantidad" class="form-control text-center" style="width: 60px;" value="1" min="1">
-          <button type="button" class="btn btn-outline-secondary ms-2" id="btn-menos">-</button>
-        </div>
-
-        <button type="button" class="btn btn-outline-dark d-flex align-items-center justify-content-center" style="font-size: 1.5rem;">
+        <button type="button" 
+          class="btn btn-outline-dark btn-agregar-carrito" 
+          onclick="agregarAlCarrito({{ $producto->id }});">
           🛒
         </button>
 
-        <p class="mb-0 fw-bold">Precio: $15.00</p>
+        <p class="mb-0 fw-bold">Precio: ${{ number_format($producto->precio, 2) }}</p>
       </div>
 
     </div>
@@ -80,30 +68,47 @@
 <div class="container">
 
    <section class="py-1">
-    <div class="container px-4 px-lg-5 mt-5">
-        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-start">
-            <div class="col mb-5">
-                <div class="card h-100" onclick="window.location='{{ route('productoinfo') }}'" style="cursor: pointer;">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">Productos Relacionados</h2>
+        <p>Descubre más productos que podrían interesarte</p>
+      
+        @if($productosRelacionados->count())
+          <div class="container px-4 px-lg-5 mt-5">
+              <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-start">
 
-                    <!-- Imagen del producto -->
-                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                @foreach ($productosRelacionados as $prod)
+                  <div class="col mb-5">
+                      <div class="card h-100" onclick="window.location='{{ route('productoinfo', $prod->id) }}'" style="cursor: pointer;">
 
-                    <!-- Detalles del producto -->
-                    <div class="card-body p-4">
-                        <div class="text-start">
-                            <h5 class="fw-bolder">Detergente líquido</h5>
-                            <p>Detergente</p>
-                            <p>$15.00</p>
-                        </div>
-                    </div>
+                          <!-- Imagen del producto -->
+                          <img class="card-img-top" src="{{ asset('storage/' . $prod->imagen) }}" alt="{{ $prod->nombre }}" />
 
+                          <!-- Detalles del producto -->
+                          <div class="card-body p-4">
+                              <div class="text-start">
+                                  <h5 class="fw-bolder">{{ $prod->nombre }}</h5>
+                                  <p>{{ $prod->categoria->nombre }}</p>
+                                  <p>{{ number_format($prod->precio, 2) }}</p>
+                              </div>
+                          </div>
 
-                </div>
-            </div>
-        </div>
+                      </div>
+                  </div>
+                @endforeach
+
+              </div>
+          </div>
+        @else
+          <p>No hay productos relacionados para mostrar.</p>
+        @endif
+
     </div>
-</section>
+   </section>
+
 </div>
+
+
+
 
 </body>
 </html>

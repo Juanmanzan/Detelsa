@@ -75,11 +75,12 @@
                 <h2 class="mb-4">Categorías</h2>
                 <div class="scroll-grid">  
                     @foreach ($categorias as $categoria)
-                        <div class="card text-center scroll-item">
+                        <div class="card text-center scroll-item pt-2">
                             <img src="{{ $categoria->imagen}}" alt="categoria1" class="card-img-circle">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $categoria->nombre }}</h5>
-                                <a href="#" class="btn btn-secondary btn-sm">Ir &raquo;</a>
+                                <a href="{{ route('tienda.productos', ['categoria' => $categoria->id]) }}"
+                                    class="btn btn-secondary btn-sm">Ir &raquo;</a>
                             </div>
                         </div>
                      @endforeach

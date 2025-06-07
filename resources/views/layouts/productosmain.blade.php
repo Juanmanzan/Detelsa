@@ -6,8 +6,7 @@
     <title>Detelsa</title>
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/productosmain.css') }}">
-
-  
+   
     <script src="{{ asset('vendor/bootstrap/js/bootstrap5.bundle.min.js') }}"></script>    
     <script src="{{ asset('javaproyecto/productosmain.js') }}"></script>
     <script src="{{ asset('javaproyecto/carrito.js') }}"></script>
@@ -35,18 +34,28 @@
                     <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" />
                     <button class="btn btn-success" type="submit">🔍</button>
                 </form>
-
+                 @if(request()->is('tienda') || request()->is('tienda/*'))
                 <button class="btn btn-success d-none d-lg-inline-block" type="button" data-bs-toggle="offcanvas"
                     data-bs-target="#categoriasMenu" aria-controls="categoriasMenu">
                     Categorías
                 </button>
+                @endif
 
                 <ul class="navbar-nav ms-3 d-flex flex-lg-row flex-column gap-2 align-items-lg-center align-items-start">
+                    @if(!request()->is('/'))
                     <li class="nav-item">
                         <a href="/" class="btn btn-success btn-nav">
                             🏠 <span class="ms-2">Inicio</span>
                         </a>
                     </li>
+                    @endif
+                    @if(!request()->is('tienda') && !request()->is('tienda/*'))
+                    <li class="nav-item">
+                        <a href="/tienda" class="btn btn-success btn-nav">
+                            <i class="bi bi-box-seam"> <span class="ms-2">Productos</span></i> 
+                        </a>
+                    </li>
+                    @endif
                     <li class="nav-item position-relative">
                         <a href="#" class="btn btn-success btn-nav" data-bs-toggle="offcanvas" data-bs-target="#carritoMenu" aria-controls="carritoMenu">
                             🛒 <span class="ms-2">Carrito</span>
@@ -67,10 +76,14 @@
                     </a>
                     <ul class="dropdown-menu w-100" aria-labelledby="categoriasDropdown">
                         @foreach ($categorias as $categoria)
-                        <li><a class="dropdown-item" href="#">{{ $categoria->nombre }}</a></li>
+                            @php 
+                                $esActiva = request('categoria') == $categoria->id; 
+                                $ruta = $esActiva ? route('tienda.productos') : route('tienda.productos', ['categoria' => $categoria->id]);
+                            @endphp
+                        <li><a href="{{ $ruta }}"
+                                    class="btn text-start {{ $esActiva ? 'btn-success' : 'btn-outline-success' }}">>{{ $categoria->nombre }}</a></li>
                         @endforeach
                     </ul>
-                     
                 </li>
             </ul>
         </nav>
@@ -84,7 +97,13 @@
         </div>
         <div class="offcanvas-body d-flex flex-column gap-2">
             @foreach ($categorias as $categoria)
-            <a href="/categoria/detergentes" class="btn btn-outline-success text-start">{{$categoria->nombre}}</a>
+                @php 
+                    $esActiva = request('categoria') == $categoria->id; 
+                    $ruta = $esActiva ? route('tienda.productos') : route('tienda.productos', ['categoria' => $categoria->id]);
+                @endphp
+            <a href="{{ $ruta }}"
+               class="btn text-start {{ $esActiva ? 'btn-success' : 'btn-outline-success' }}">
+                        {{$categoria->nombre}}</a>
             @endforeach
         </div>
     </div>

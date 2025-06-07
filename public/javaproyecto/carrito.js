@@ -13,32 +13,62 @@ function actualizarContadorCarrito() {
     });
 }
 
+// Función para mostrar un toast
+function mostrarToast(mensaje) {
+  const toastElement = document.getElementById('miToast');
+  if (!toastElement) return;
+
+  const toastBody = toastElement.querySelector('.toast-body');
+  toastBody.textContent = mensaje;
+
+  const toast = new bootstrap.Toast(toastElement);
+  toast.show();
+}
+
 // Función para agregar producto al carrito
 function agregarAlCarrito(productoId, cantidad = 1) {
-  fetch("/carrito/agregar", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
-    },
-     body: JSON.stringify({
-      producto_id: productoId,
-      cantidad: cantidad,
-      actualizar: true })
-  })
-  .then(res => res.json())
-  .then(data => {
-    console.log(data.mensaje);
-    actualizarContadorCarrito();
+    fetch("/carrito/agregar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({
+            producto_id: productoId,
+            cantidad: cantidad,
+            incrementar: true // ¡Clave para sumar en lugar de reemplazar!
+        })
+    })
+    .then(response => {
+        if (!response.ok) throw new Error("Error en el servidor");
+        return response.json();
+    })
+    .then(data => {
+        // Actualiza el contador global
+        const contadorGlobal = document.getElementById("cart-count");
+        if (contadorGlobal) {
+            contadorGlobal.textContent = data.total || 0;
+        }
+        actualizarContadorCarrito();
+        // Actualiza el badge del producto (si existe)
+        const badge = document.getElementById(`badge-${productoId}`);
+        if (badge) {
+            badge.textContent = (parseInt(badge.textContent) || 0) + cantidad;
+            badge.style.display = "block";
+            setTimeout(() => { badge.style.display = "none"; }, 2000);
+        }
 
-    const carritoOffcanvas = document.getElementById('carritoMenu');
-    const carritoOffcanvasInstance = bootstrap.Offcanvas.getInstance(carritoOffcanvas);
-    if (carritoOffcanvasInstance) carritoOffcanvasInstance.show();
-  })
-  .catch(error => {
-    console.error("Error al agregar al carrito:", error);
-    alert('No se pudo agregar el producto al carrito. Intenta de nuevo.');
-  });
+        // Muestra feedback
+        mostrarToast("¡Producto agregado!");
+
+        // Recarga el carrito si está visible
+        const carritoVisible = document.querySelector('.offcanvas.show');
+        if (carritoVisible) cargarCarrito();
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        mostrarToast("Error al agregar producto", "danger");
+    });
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -57,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       let html = '<ul class="list-group">';
       let totalGeneral = 0;
-      let mensajeWhatsApp = 'Hola, quiero realizar el siguiente pedido:%0A';
+      let mensajeWhatsApp = 'Hola, quiero realizar el siguiente pedido:\n';
 
       for (const id in carrito) {
         const item = carrito[id];
@@ -65,12 +95,12 @@ document.addEventListener('DOMContentLoaded', function () {
         totalGeneral += totalProducto;
 
         // Agregar detalle del producto al mensaje de WhatsApp
-        mensajeWhatsApp += `• ${item.nombre} - Cantidad: ${item.cantidad} - Total: $${totalProducto.toFixed(2)}%0A`;
+        mensajeWhatsApp += `• ${item.nombre} - Cantidad: ${item.cantidad} - Total: $${totalProducto.toFixed(2)}\n`;
 
         html += `
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
-              <img src="${item.imagen ?? 'https://dummyimage.com/50x50/dee2e6/6c757d.jpg'}" alt="${item.nombre}" style="width:50px; height:50px; object-fit: cover; margin-right: 10px;">
+              <img src="${ item.imagen ?? 'https://dummyimage.com/50x50/dee2e6/6c757d.jpg'}" alt="${item.nombre}" style="width:50px; height:50px; object-fit: cover; margin-right: 10px;">
               <div>
                 <strong>${item.nombre}</strong><br>
                 $${item.precio.toFixed(2)}<br>
@@ -84,16 +114,19 @@ document.addEventListener('DOMContentLoaded', function () {
           </li>`;
       }
 
-      mensajeWhatsApp += `%0A ------ Dando un total: $${totalGeneral.toFixed(2)}`;
+      mensajeWhatsApp += `\n ------ Dando un total: $${totalGeneral.toFixed(2)}`;
 
       html += `</ul>
         <hr>
         <h5 class="text-end me-3">Total: $${totalGeneral.toFixed(2)}</h5>
         <div class="text-end me-3 mb-3">
-          <a href="https://wa.me/593999999999?text=${mensajeWhatsApp}" 
-             class="btn btn-success" target="_blank" rel="noopener noreferrer">
-            🛒 Finalizar pedido por WhatsApp
+        <a href="#" 
+           class="btn btn-success finalizar-pedido-wp" 
+           data-mensaje="${mensajeWhatsApp}"
+           onclick="finalizarPedido(event)"> 
+            Finalizar pedido por WhatsApp
           </a>
+          
         </div>`;
 
       contenedor.innerHTML = html;
@@ -101,6 +134,8 @@ document.addEventListener('DOMContentLoaded', function () {
     .catch(err => {
       console.error('Error cargando carrito:', err);
     });
+
+
 }
 
 
@@ -170,48 +205,96 @@ document.addEventListener('change', function (e) {
   actualizarContadorCarrito();
 });
 
-document.addEventListener('click', function (e) {
-  if (e.target.classList.contains('finalizar-pedido-wp')) {
-    e.preventDefault();  // Evita que siga el link
+// Función para finalizar pedido por WhatsApp
+async function finalizarPedido(event) {
+  event.preventDefault();
 
-    const mensajeRaw = e.target.getAttribute('data-mensaje');
-    const mensaje = encodeURIComponent(mensajeRaw);
-    const numero = '593999999999'; // Cambia a tu número real
+  const boton = event.currentTarget;
+  const mensaje = boton.getAttribute('data-mensaje');
+  const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
 
-    fetch('/carrito/vaciar', {
+  if (!csrfToken) {
+    alert('Token CSRF no encontrado.');
+    return;
+  }
+
+  try {
+    const response = await fetch('/carrito/vaciar', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-      },
-      body: JSON.stringify({})  // Puede ser vacío, depende de tu backend
-    })
-    .then(res => {
-      if (!res.ok) throw new Error('No se pudo vaciar el carrito');
-      return res.json();
-    })
-    .then(data => {
-      actualizarContadorCarrito();
-      alert("Gracias por tu pedido 😄");
-
-      window.open(`https://wa.me/${numero}?text=${mensaje}`, '_blank');
-
-      // Cerrar el modal (offcanvas)
-      const carritoOffcanvas = document.getElementById('carritoMenu');
-      const offcanvasInstance = bootstrap.Offcanvas.getInstance(carritoOffcanvas);
-      if (offcanvasInstance) offcanvasInstance.hide();
-
-      // Refrescar contenido del carrito (vacío)
-      cargarCarrito();
-    })
-    .catch(err => {
-      console.error('Error vaciando carrito:', err);
-      alert('Error al finalizar pedido, intenta de nuevo.');
+        'X-CSRF-TOKEN': csrfToken,
+        'Content-Type': 'application/json'
+      }
     });
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status}`);
+    }
+
+    // Manejar el posible JSON o texto vacío
+    let data = {};
+    try {
+      const text = await response.text();
+      data = text ? JSON.parse(text) : {};
+    } catch (jsonError) {
+      console.warn('Respuesta no es un JSON válido:', jsonError);
+    }
+
+    if (typeof actualizarContadorCarrito === 'function') {
+      actualizarContadorCarrito();
+    }
+
+    const carritoMenu = document.getElementById('carritoMenu');
+    const offcanvas = carritoMenu ? bootstrap.Offcanvas.getInstance(carritoMenu) : null;
+    if (offcanvas) offcanvas.hide();
+
+    setTimeout(() => {
+      const numero = '593964131003';
+      const url = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensaje)}`;
+      window.open(url, '_blank');
+    }, 300);
+
+    if (typeof mostrarToast === 'function') {
+      mostrarToast(data.message || '¡Pedido enviado por WhatsApp!');
+    }
+
+  } catch (error) {
+    console.error('Error al finalizar pedido:', error);
+    alert('Ocurrió un error al finalizar el pedido. Intenta nuevamente.');
   }
-});
+}
 
+//Mensaje de wp 
+function enviarProductoWhatsApp(boton) {
+  const card = boton.closest('.card');
+  if (!card) {
+    alert('No se pudo obtener el producto');
+    return;
+  }
 
-// Evento para botón de finalizar pedido por WhatsApp
+  // Obtener nombre del producto
+  const nombre = card.querySelector('.fw-bolder')?.textContent.trim();
+  // Obtener precio del producto
+  const precioTexto = card.querySelector('p')?.textContent.trim();
+
+  if (!nombre || !precioTexto) {
+    alert('Datos incompletos del producto');
+    return;
+  }
+
+  const mensaje = `Hola, estoy interesado en el producto: ${nombre}\nPrecio: ${precioTexto}`;
+
+  // Reemplaza el número de WhatsApp con el tuyo real
+  const numero = '593964131003';
+  const url = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensaje)}`;
+
+  // Abrir WhatsApp
+  window.open(url, '_blank');
+
+  // (Opcional) Toast de confirmación
+  if (typeof mostrarToast === 'function') {
+    mostrarToast('Redirigiendo a WhatsApp...');
+  }
+}
 
 

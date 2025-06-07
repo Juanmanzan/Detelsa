@@ -74,15 +74,17 @@ Route::get('/admin', function () {
 })->middleware(['auth', 'verified'])->name('admin');
 
 Route::get('/', [InformacionController::class, 'inicio'])->name('welcome');
-Route::get('/tienda', [InformacionController::class, 'productos'])->name('tienda.productos');
 Route::get('/productoinfo/{id}', [InformacionController::class, 'productoinfo'])->name('productoinfo');
 Route::get('/acercadenosotros', [InformacionController::class, 'acercadenosotros'])->name('acercadenosotros');
+Route::get('/tienda', [InformacionController::class, 'index'])->name('tienda.productos');
+
+
+
 
 Route::post('/carrito/agregar', [CarritoController::class, 'agregar']);
+Route::post('/carrito/vaciar', [CarritoController::class, 'vaciar']);
+Route::get('/carrito/mostrar', [CarritoController::class, 'mostrar']);
 Route::post('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar']);
 Route::get('/carrito/contador', [CarritoController::class, 'contador']);
-Route::get('/carrito/mostrar', [CarritoController::class, 'mostrar']);
-Route::post('/carrito/vaciar', [CarritoController::class, 'vaciar']);
-
 
 require __DIR__.'/auth.php';

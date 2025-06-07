@@ -76,23 +76,36 @@ class CarritoController extends Controller
 
         // Validar que todos los productos tengan formato correcto
         foreach ($carrito as $id => &$item) { // ← ¡Aquí está el cambio!
-            if (!isset($item['nombre'], $item['precio'], $item['cantidad'])) {
+            if (!isset($item['nombre'], $item['precio'], $item['cantidad'],$item['imagen'])) {
                 unset($carrito[$id]); // Eliminar entradas corruptas
             } else {
                 $item['precio'] = (float) $item['precio'];
                 $item['cantidad'] = (int) $item['cantidad'];
             }
+            if (isset($item['imagen'])) {
+            $item['imagen'] = asset($item['imagen']);
+        }
         }
 
         return response()->json($carrito);
     }
 
 
-    public function vaciar()
-    {
-        session()->forget('carrito');
-        return response()->json(['mensaje' => 'Carrito vaciado']);
+    public function vaciar() {
+    try {
+         session()->forget('carrito');
+        
+        return response()->json([
+    'success' => true,
+    'message' => 'Carrito vaciado'
+], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => $e->getMessage()
+        ], 500);
     }
+}
 
 
 }
