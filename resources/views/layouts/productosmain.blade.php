@@ -66,10 +66,11 @@
                         Categorías
                     </a>
                     <ul class="dropdown-menu w-100" aria-labelledby="categoriasDropdown">
-                        <li><a class="dropdown-item" href="/categoria/detergentes">Detergentes</a></li>
-                        <li><a class="dropdown-item" href="/categoria/jabon">Jabón</a></li>
-                        <li><a class="dropdown-item" href="/categoria/cloro">Cloro</a></li>
+                        @foreach ($categorias as $categoria)
+                        <li><a class="dropdown-item" href="#">{{ $categoria->nombre }}</a></li>
+                        @endforeach
                     </ul>
+                     
                 </li>
             </ul>
         </nav>
@@ -82,9 +83,9 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column gap-2">
-            <a href="/categoria/detergentes" class="btn btn-outline-success text-start">🧴 Detergentes</a>
-            <a href="/categoria/jabon" class="btn btn-outline-success text-start">🧼 Jabón</a>
-            <a href="/categoria/cloro" class="btn btn-outline-success text-start">🧪 Cloro</a>
+            @foreach ($categorias as $categoria)
+            <a href="/categoria/detergentes" class="btn btn-outline-success text-start">{{$categoria->nombre}}</a>
+            @endforeach
         </div>
     </div>
 
