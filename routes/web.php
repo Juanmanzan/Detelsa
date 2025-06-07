@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\InformacionController;
+use App\Http\Controllers\ContrasenaController;
 
 
 
@@ -31,6 +32,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    
     Route::get('/categorias', [CategoriaController::class, 'index'])->name('categorias.index');
     Route::post('/categorias', [CategoriaController::class, 'store'])->name('categorias.store');
     Route::put('/categorias/{id}', [CategoriaController::class, 'update'])->name('categorias.update');
@@ -49,15 +51,18 @@ Route::middleware(['auth'])->group(function () {
     Route::put('perfil/{id}', [PerfilController::class, 'update'])->name('perfil.update');
     Route::delete('perfil/{id}', [PerfilController::class, 'destroy'])->name('perfil.destroy');
 
+
+
+// Cambio de credenciales
+Route::get('contrasena', [ContrasenaController::class, 'edit'])->name('contrasena.edit');
+Route::post('verificar-password', [ContrasenaController::class, 'verificarPassword'])->name('verificar.password');
+Route::post('contrasena/update', [ContrasenaController::class, 'update'])->name('contrasena.update');
+
 });
 
-    Route::get('perfil', [PerfilController::class, 'index'])->name('perfil.index');
-    Route::post('perfil', [PerfilController::class, 'store'])->name('perfil.store');
-    Route::get('perfil/edit/{id}', [PerfilController::class, 'edit'])->name('perfil.edit');
-    Route::put('perfil/{id}', [PerfilController::class, 'update'])->name('perfil.update');
-    Route::delete('perfil/{id}', [PerfilController::class, 'destroy'])->name('perfil.destroy');
-
-
+Route::get('/dashboard', function () {
+    return view('login'); // o donde tengas tu vista de dashboard
+})->name('dashboard');
 
 Route::get('/', function () {
     return view('welcome');

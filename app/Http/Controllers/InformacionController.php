@@ -17,7 +17,8 @@ class InformacionController extends Controller
 
      public function productos(){
         $productos = Producto::all();
-        return view('productos', compact('productos'));
+        $categorias = Categoria::all();
+        return view('productos', compact('productos', 'categorias'));
     }
 
     public function productoinfo($id) {

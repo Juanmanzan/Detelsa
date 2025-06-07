@@ -300,12 +300,7 @@ return [
     */
 
     'menu' => [
-        // Navbar items:
-        [
-            'type' => 'navbar-search',
-            'text' => 'search',
-            'topnav_right' => true,
-        ],
+       
 
         // Sidebar items:
        
@@ -331,7 +326,7 @@ return [
         ],
         [
             'text' => 'Cambiar contraseña',
-            'url' => 'admin/settings',
+            'url' => 'contrasena',
             'icon' => 'fas fa-fw fa-lock',
         ],
         [

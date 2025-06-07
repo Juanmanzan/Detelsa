@@ -308,12 +308,69 @@
             color: var(--azul-principal);
             margin-bottom: 10px;
         }
-        
+         .search-form {
+    display: flex;
+    margin-bottom: 20px;
+    max-width: 500px;
+    position: relative;
+    }
+
+    .search-input {
+        flex: 1;
+        padding: 12px 20px;
+        border: 2px solid #e1e5eb;
+        border-radius: 30px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: var(--azul-claro);
+        box-shadow: 0 2px 15px rgba(26, 58, 108, 0.2);
+    }
+
+    .search-button {
+        background: linear-gradient(135deg, var(--azul-principal), var(--azul-secundario));
+        color: white !important;
+        border: none;
+        border-radius: 30px;
+        padding: 12px 25px;
+        font-weight: 600;
+        margin-left: -50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(26, 58, 108, 0.25);
+        display: flex;
+        align-items: center;
+    }
+
+    .search-button:hover {
+        background: linear-gradient(135deg, var(--azul-secundario), var(--azul-principal));
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(26, 58, 108, 0.35);
+    }
      
     </style>
 @stop
 
+@section('content_header')
+    <h1 class="text-azul">Categorías</h1>
+@stop
+
+
 @section('content')
+
+
+    <form class="search-form">
+        <input type="text" id="search-input" placeholder="Buscar..." class="search-input">
+        <button type="button" id="search-button" class="search-button">
+            🔍 Buscar
+        </button>
+    </form>
+
+
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="h4 text-muted">Gestión de categorías de productos</h2>
         <button type="button" class="btn btn-crear" data-toggle="modal" data-target="#crearCategoriaModal">
@@ -552,6 +609,47 @@ $(document).ready(function() {
             $(this).css('transform', 'translateY(0)');
         }
     );
+
+    // Función para buscar categorías en la tabla
+function searchCategories() {
+    const searchTerm = $('#search-input').val().toLowerCase().trim();
+    
+    $('table tbody tr').each(function() {
+        const $row = $(this);
+        const nombre = $row.find('.nombre-categoria').text().toLowerCase();
+        
+        if (nombre.includes(searchTerm)) {
+            $row.show();
+        } else {
+            $row.hide();
+        }
+    });
+}
+
+$(document).ready(function() {
+    // ... (código existente para AJAX y modales) ...
+    
+    // Evento para el botón de búsqueda
+    $('#search-button').click(searchCategories);
+    
+    // Evento para búsqueda al presionar Enter
+    $('#search-input').keyup(function(e) {
+        if (e.key === 'Enter') {
+            searchCategories();
+        }
+    });
+    
+    // Evento para limpiar búsqueda
+    $('#search-input').on('input', function() {
+        if (!$(this).val()) {
+            $('table tbody tr').show();
+        }
+    });
+    
+    // ... (resto del código existente) ...
+});
+
+
 });
 </script>
 @stop
