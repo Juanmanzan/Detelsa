@@ -71,7 +71,7 @@ Route::get('/admin', function () {
 Route::get('/', [InformacionController::class, 'inicio'])->name('welcome');
 Route::get('/tienda', [InformacionController::class, 'productos'])->name('tienda.productos');
 Route::get('/productoinfo/{id}', [InformacionController::class, 'productoinfo'])->name('productoinfo');
-
+Route::get('/acercadenosotros', [InformacionController::class, 'acercadenosotros'])->name('acercadenosotros');
 
 Route::post('/carrito/agregar', [CarritoController::class, 'agregar']);
 Route::post('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar']);
