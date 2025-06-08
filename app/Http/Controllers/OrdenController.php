@@ -48,6 +48,42 @@ class OrdenController extends Controller
         }
     }
 
+    public function guardar(Request $request)
+{
+    try {
+        $productoId = $request->input('producto_id');
+        $nombre = $request->input('nombre');
+        $precio = floatval($request->input('precio'));
+
+        if (!$productoId || !$nombre || !$precio) {
+            return response()->json(['error' => 'Datos incompletos'], 400);
+        }
+
+        // Guarda la orden principal
+        $orden = \App\Models\Orden::create([
+            'fecha' => now(),
+            'total' => $precio
+        ]);
+
+        // Guarda el detalle (1 producto por defecto)
+        \App\Models\OrdenDetalle::create([
+            'orden_id' => $orden->id,
+            'producto_id' => $productoId,
+            'cantidad' => 1,
+            'precio_unitario' => $precio,
+            'subtotal' => $precio
+        ]);
+
+        return response()->json(['success' => true]);
+
+    } catch (\Throwable $e) {
+        // Captura errores y devuelve mensaje útil
+        return response()->json(['error' => $e->getMessage()], 500);
+    }
+}
+
+
+
 
     public function index(){
         $ordenes = Orden::all();

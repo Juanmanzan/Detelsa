@@ -279,55 +279,60 @@ async function finalizarPedido(event) {
 //mensaje de whattsapp
 
 function enviarProductoWhatsApp(boton) {
-  event.stopPropagation(); // Detiene propagación si es necesario
+  event.stopPropagation();
 
-  const card = boton.closest('.product-card'); // CAMBIADO
+  const productoId = boton.dataset.id;
+  const card = boton.closest('.product-card') || boton.closest('.product-detail-card');
   if (!card) {
     alert('No se pudo obtener el producto');
     return false;
   }
 
   const nombre = card.querySelector('.product-name')?.textContent.trim();
-  
-  const precioTexto = card.querySelector('.product-price')?.textContent.trim();
+  const precio = card.querySelector('.product-price')?.textContent.trim();
 
-  if (!nombre || !precioTexto) {
-    alert('Datos incompletos del producto');
-    return false;
-  }
+  const precioNumerico = parseFloat(precio.replace(/[^0-9.]/g, ''));
 
-  const mensaje = `Hola, estoy interesado en el producto:\n📦 *${nombre}*\n💰 Precio: ${precioTexto}`;
-
-  const numero = '593964131003';
-  const url = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensaje)}`;
-
-  window.open(url, '_blank');
-
-  if (typeof mostrarToast === 'function') {
-    mostrarToast('Redirigiendo a WhatsApp...');
-  }
-
+  if (!nombre || !precio || isNaN(precioNumerico)) {
+  alert('Datos incompletos o precio inválido del producto');
   return false;
 }
 
-function enviarProductoWhatsApp(boton, productoId) {
-  const nombre = document.querySelector('.product-name')?.textContent.trim();
-  const precio = document.querySelector('.product-price')?.textContent.trim();
+  console.log({
+  producto_id: parseInt(productoId),
+  nombre: nombre,
+  precio: parseFloat(precioNumerico)
+  });
 
-  if (!nombre || !precio) {
-    alert('Datos incompletos del producto');
-    return;
-  }
+  fetch('/guardar-orden', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+    },
+    body: JSON.stringify({
+      producto_id: parseInt(productoId),
+      nombre: nombre,
+      precio: parseFloat(precioNumerico)
+    })
+  })
+  .then(response => {
+    if (!response.ok) throw new Error('Error al guardar la orden');
+    return response.json();
+  })
+  .then(data => {
+    const mensaje = `Hola, estoy interesado en el producto:\n ${nombre}\n Precio: ${precio}`;
+    const numero = '593964131003';
+    const url = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensaje)}`;
+    window.open(url, '_blank');
+    if (typeof mostrarToast === 'function') mostrarToast('Redirigiendo a WhatsApp...');
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('No se pudo registrar la orden');
+  });
 
-  const mensaje = `Hola, estoy interesado en el producto:\n📦 *${nombre}*\n💰 Precio: ${precio}`;
-
-  const numero = '593964131003';
-  const url = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensaje)}`;
-  window.open(url, '_blank');
-
-  if (typeof mostrarToast === 'function') {
-    mostrarToast('Redirigiendo a WhatsApp...');
-  }
+  return false;
 }
 
 

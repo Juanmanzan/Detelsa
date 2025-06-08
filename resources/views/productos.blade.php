@@ -337,7 +337,7 @@
                     
                     <div class="product-actions">
                         <button class="action-btn whatsapp-btn"
-                                onclick="enviarProductoWhatsApp(this);  event.stopPropagation(); return false;">
+                                onclick="enviarProductoWhatsApp(this);  event.stopPropagation();" data-id="{{ $producto->id }}">
                             <img class="action-icon" 
                                  src="https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo-whatsapp-512.png" 
                                  alt="WhatsApp">

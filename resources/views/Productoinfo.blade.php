@@ -365,7 +365,7 @@
                 
                 <div class="product-actions">
                     <button class="btn-whatsapp"
-                            onclick="enviarProductoWhatsApp(this, {{ $producto->id }});">
+                            onclick="enviarProductoWhatsApp(this);event.stopPropagation();"  data-id="{{ $producto->id }}">
                         <i class="fab fa-whatsapp"></i> Comprar
                     </button>
                         
