@@ -20,12 +20,12 @@
 @section('content')
 
 
-    <form class="search-form">
+    <div class="search-form">
         <input type="text" id="search-input" placeholder="Buscar..." class="search-input">
         <button type="button" id="search-button" class="search-button">
             🔍 Buscar
         </button>
-    </form>
+    </div>
 
 
     <div class="d-flex justify-content-between align-items-center mb-4">

@@ -13,6 +13,7 @@
     // Función para buscar productos en la tabla
     function searchProducts() {
         const searchTerm = $('#search-input').val().toLowerCase().trim();
+
         
         $('table tbody tr').each(function() {
             const $row = $(this);
