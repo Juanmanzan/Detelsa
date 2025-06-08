@@ -9,6 +9,7 @@ use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\InformacionController;
 use App\Http\Controllers\ContrasenaController;
 use App\Http\Controllers\OrdenController;
+use App\Http\Controllers\EstadisticasController;
 
 
 
@@ -68,9 +69,8 @@ Route::get('/dashboard', function () {
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/admin', function () {
-        return view('admin');
-})->middleware(['auth', 'verified'])->name('admin');
+
+Route::get('/admin', [EstadisticasController::class, 'estadisticas'])->middleware(['auth', 'verified'])->name('admin');
 
 
 Route::get('/', [InformacionController::class, 'inicio'])->name('welcome');

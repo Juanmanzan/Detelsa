@@ -7,7 +7,7 @@ $(document).ready(function() {
         let formData = new FormData(this);
 
         $.ajax({
-            url: "{{ route('categorias.store') }}",
+            url: storeCategoriaURL,
             method: 'POST',
             data: formData,
             processData: false,

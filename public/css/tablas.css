@@ -117,13 +117,13 @@ td img:hover {
     color: #495057;
     font-size: 0.95rem;
     line-height: 1.5;
-    text-align: left;
+    text-align: left; /* Esto ya alinea todo el texto, incluido el <strong> */
     padding: 8px;
 }
 
-.descripcion-producto strong {
-    display: block;
-    text-align: left;
+.descripcion-producto div {
+    text-align: left; /* Esto ya alinea todo el texto, incluido el <strong> */
+
 }
 
 .btn-group-custom {

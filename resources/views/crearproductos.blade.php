@@ -74,9 +74,19 @@
                                 </span>
                             </td>
                             <td class="descripcion-producto">
-                                <div><strong>Descripción:</strong> {{ Str::limit($producto->descripcion, 100) }}</div>
-                                <div><strong>Ingredientes:</strong> {{ Str::limit($producto->ingredientes, 100) }}</div>
-                                <div><strong>Modo de Uso:</strong> {{ Str::limit($producto->modo_de_uso, 100) }}</div>
+                                <div><strong>Descripción:</strong><br>{{ Str::limit($producto->descripcion, 100) }}</div>
+                               
+                                 <div><strong>Ingredientes:</strong><br>
+                                    <ul>
+                                        @foreach(explode("\n", $producto->ingredientes) as $linea)
+                                            @if(trim($linea) !== '')
+                                                <li>{{ $linea }}</li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                </div>
+
+                                <div><strong>Modo de Uso:</strong><br>{{ Str::limit($producto->modo_de_uso, 100) }}</div>
                             </td>
                             <td>
                                 <div class="btn-group-custom">

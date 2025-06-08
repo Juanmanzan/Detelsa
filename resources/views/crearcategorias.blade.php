@@ -175,6 +175,7 @@
 @stop
 
 @section('js')
-
+<script>const storeCategoriaURL = "{{ route('categorias.store') }}";</script>
 <script src="{{ asset('javaproyecto/buscar.js') }}"></script>
+
 @stop
