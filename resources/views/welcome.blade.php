@@ -3,7 +3,7 @@
 @section('productosmain_container')
 <style>
     .welcome-page {
-        --primary-color: #2A7B9B;
+        --primary-color: #198754;
         --secondary-color: #3CC274;
         --accent-color: #FF6B6B;
         --light-bg: #f8f9fa;
@@ -110,7 +110,7 @@
     .welcome-page .category-img {
         width: 120px;
         height: 120px;
-        object-fit: cover;
+        background-size: cover;
         border-radius: 50%;
         border: 3px solid var(--primary-color);
         transition: all 0.5s ease;
@@ -242,8 +242,10 @@
         height: 100%;
         opacity: 0;
         transition: opacity 1s ease-in-out;
-        background-size: cover;
+        background-size: contain; 
+        background-repeat: no-repeat;
         background-position: center;
+
     }
     
     .welcome-page .promo-slide.active {

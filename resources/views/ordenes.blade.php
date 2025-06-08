@@ -15,7 +15,7 @@
     </h1>
 @stop
 @section('content')
-<div class="container">
+
 
     <div class="table-container">
         <div class="table-responsive">
@@ -75,7 +75,7 @@
             </table>
         </div>
     </div>
-</div>
+
 @endsection
 
 @section('js')

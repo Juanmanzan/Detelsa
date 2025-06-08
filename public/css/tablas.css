@@ -78,11 +78,12 @@ td img {
     height: 120px;
     display: block;
     margin: 0 auto;
-    object-fit: cover;
+    object-fit: contain; /* <-- cambia esto */
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     border: 1px solid var(--gris-medio);
     transition: all 0.3s ease;
+    background-color: #f9f9f9; /* opcional para rellenar el fondo vacío */
 }
 
 td img:hover {

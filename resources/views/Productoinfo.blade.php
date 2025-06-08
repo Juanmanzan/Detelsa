@@ -221,21 +221,25 @@
         z-index: 2;
     }
     
-    /* Imagen que ocupa todo el ancho del contenedor */
     .related-image-container {
         position: relative;
         width: 100%;
-        height: 200px; /* Altura fija */
+        height: 200px;
         background: #f1f8e9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         overflow: hidden;
     }
-    
+
     .related-product-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain; /* Opcional para navegadores modernos */
+        display: block;
         transition: transform 0.5s ease;
     }
+
     
     .related-product-card:hover .related-product-image {
         transform: scale(1.05);
@@ -419,13 +423,14 @@
                     @endif
                     
                     <!-- Contenedor de imagen que ocupa todo el ancho -->
-                    <div class="related-image-container">
-                        <img class="related-product-image" 
-                             src="{{ asset($prod->imagen) }}" 
-                             alt="{{ $prod->nombre }}" 
-                             onerror="this.onerror=null; this.src='https://dummyimage.com/300x200/dee2e6/6c757d.jpg'" />
+
+                        <div class="related-image-container" 
+                        style="background-image: url('{{ asset($prod->imagen) }}');
+                                background-size: cover;
+                                background-position: center;
+                                background-repeat: no-repeat;">
                     </div>
-                    
+
                     <div class="related-product-content">
                         <h3 class="related-product-name">{{ $prod->nombre }}</h3>
                         <p class="related-product-category">{{ $prod->categoria->nombre }}</p>
