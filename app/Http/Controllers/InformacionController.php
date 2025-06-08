@@ -15,11 +15,6 @@ class InformacionController extends Controller
         return view('welcome', compact('categorias', 'productos'));
     }
 
-    public function productos(){
-        $productos = Producto::all();
-        $categorias = Categoria::all();
-        return view('productos', compact('productos', 'categorias'));
-    }
 
     public function productoinfo($id) {
         $producto = Producto::findOrFail($id);
@@ -41,17 +36,27 @@ class InformacionController extends Controller
     }
 
 
-    public function index(Request $request){
+    public function index(Request $request) {
         $categoriaId = $request->input('categoria');
+        $orden = $request->input('orden'); // nuevo parámetro para orden
 
         $categorias = Categoria::all();
 
         $productos = Producto::when($categoriaId, function ($query, $categoriaId) {
-            return $query->where('categoria_id', $categoriaId);
-        })->get();
+                return $query->where('categoria_id', $categoriaId);
+            })
+            ->when($orden, function ($query, $orden) {
+                if ($orden === 'asc') {
+                    return $query->orderBy('precio', 'asc');
+                } elseif ($orden === 'desc') {
+                    return $query->orderBy('precio', 'desc');
+                }
+            })
+            ->get();
 
-        return view('productos', compact('productos', 'categorias', 'categoriaId'));
+        return view('productos', compact('productos', 'categorias', 'categoriaId', 'orden'));
     }
+
 
 
 }

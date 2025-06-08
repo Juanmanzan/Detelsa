@@ -309,16 +309,20 @@
 <div class="products-container">
     <div class="container">
         
-        <div class="products-header">
-            <h2 class="section-title">Nuestros Productos</h2>
-            <div class="d-flex align-items-center">
-                <span class="me-2">Ordenar por:</span>
-                <select class="form-select" style="width: auto;">
-                    <option>Precio: Menor a Mayor</option>
-                    <option>Precio: Mayor a Menor</option>>
+     <div class="products-header">
+        <h2 class="section-title">Nuestros Productos</h2>
+        <div class="d-flex align-items-center">
+            <span class="me-2">Ordenar por:</span>
+            <form method="GET" action="{{ route('tienda.productos') }}" >
+                <select name="orden" class="form-select" onchange="this.form.submit()">
+                    <option value="asc" {{ request('orden') == 'asc' ? 'selected' : '' }}>Precio: Menor a Mayor</option>
+                    <option value="desc" {{ request('orden') == 'desc' ? 'selected' : '' }}>Precio: Mayor a Menor</option>
                 </select>
-            </div>
+            </form>
         </div>
+     </div>
+
+     
         
         @if($productos->count() > 0)
         <div class="products-grid">
@@ -379,4 +383,6 @@
        
     </div>
 </div>
+
+
 @endsection
