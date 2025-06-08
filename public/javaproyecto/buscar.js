@@ -15,7 +15,12 @@ $(document).ready(function() {
             success: function(response) {
                 $('#alerta-error-nombre').hide();
                 $('#crearCategoriaModal').modal('hide');
+
+                // Mostrar mensaje de éxito en div estático
+
+                sessionStorage.setItem('mensaje_exito', response.success);
                 location.reload();
+
             },
             error: function(xhr) {
                 if (xhr.status === 422) {
@@ -27,6 +32,12 @@ $(document).ready(function() {
             }
         });
     });
+
+
+
+
+
+    
 
     $('#formEditarCategoria').submit(function(e) {
         e.preventDefault();

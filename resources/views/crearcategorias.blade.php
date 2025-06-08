@@ -21,7 +21,7 @@
 
     @if(session('success'))
         <div id="mensaje-exito" class="mensaje-exito">
-            <i class="fas fa-check-circle"></i> {{ session('success') }}
+            <i class="fas fa-check-circle"></i> {{ session('success') }} 
         </div>
 
         <script>
@@ -34,6 +34,26 @@
             }, 3000);
         </script>
     @endif
+
+
+        <div id="mensaje-exito-ajax" class="mensaje-exito" style="display: none;">
+            <i class="fas fa-check-circle"></i> <span id="texto-mensaje-exito"></span>
+        </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const mensaje = sessionStorage.getItem('mensaje_exito');
+            if (mensaje) {
+                $('#texto-mensaje-exito').text(mensaje);
+                $('#mensaje-exito-ajax').fadeIn();
+                setTimeout(() => {
+                    $('#mensaje-exito-ajax').fadeOut();
+                }, 3000);
+                sessionStorage.removeItem('mensaje_exito');
+            }
+        });
+    </script>
+ 
 
 
     <div class="search-form">
