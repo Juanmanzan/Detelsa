@@ -7,7 +7,7 @@
 @section('content_header')
     <div class="d-flex justify-content-between align-items-center">
         <h1>Panel de Administración</h1>
-        <span class="badge bg-primary">{{ now()->format('d M Y - H:i') }}</span>
+        <span class="badge bg-primary">{{ now()->format('d M Y') }}</span>
     </div>
 @stop
 
@@ -43,9 +43,10 @@
         
         <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
             <div class="small-box bg-warning shadow-sm">
-                <div class="inner">
+                <div class="inner text-white">
                     <h3 data-toggle="tooltip" title="{{ $productoNombre }}">
                         {{ Str::limit($productoNombre, 50) }}
+                         <small class="text-muted">({{ $productoCantidad }})</small>
                     </h3>
                     <p>Producto Más Vendido</p>
                 </div>
@@ -196,7 +197,6 @@
                                 <tr>
                                     <th>Fecha</th>
                                     <th class="text-right">Órdenes</th>
-                                    <th class="text-right">Cambio</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -213,23 +213,6 @@
                                     <tr>
                                         <td>{{ \Carbon\Carbon::parse($tendencia->fecha)->format('d M') }}</td>
                                         <td class="text-right">{{ $tendencia->total }}</td>
-                                        <td class="text-right">
-                                            @if($change !== null)
-                                                @if($change > 0)
-                                                    <span class="text-success">
-                                                        <i class="fas fa-arrow-up"></i> {{ number_format($change, 1) }}%
-                                                    </span>
-                                                @elseif($change < 0)
-                                                    <span class="text-danger">
-                                                        <i class="fas fa-arrow-down"></i> {{ number_format(abs($change), 1) }}%
-                                                    </span>
-                                                @else
-                                                    <span class="text-muted">0%</span>
-                                                @endif
-                                            @else
-                                                <span class="text-muted">N/A</span>
-                                            @endif
-                                        </td>
                                     </tr>
                                 @endforeach
                                 @if($tendenciaOrdenes->isEmpty())

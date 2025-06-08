@@ -19,6 +19,22 @@
 
 @section('content')
 
+    @if(session('success'))
+        <div id="mensaje-exito" class="mensaje-exito">
+            <i class="fas fa-check-circle"></i> {{ session('success') }}
+        </div>
+
+        <script>
+            setTimeout(() => {
+                const mensaje = document.getElementById('mensaje-exito');
+                if (mensaje) {
+                    mensaje.style.opacity = '0';
+                    setTimeout(() => mensaje.remove(), 500);
+                }
+            }, 3000);
+        </script>
+    @endif
+
 
     <div class="search-form">
         <input type="text" id="search-input" placeholder="Buscar..." class="search-input">

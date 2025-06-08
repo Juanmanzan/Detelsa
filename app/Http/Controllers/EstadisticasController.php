@@ -50,10 +50,10 @@ class EstadisticasController extends Controller
             
             // Tendencia de órdenes (últimos 7 días)
             $tendenciaOrdenes = Orden::selectRaw(
-                    'DATE(created_at) as fecha, COUNT(*) as total'
+                    'DATE(fecha) as fecha, COUNT(*) as total'
                 )
-                ->whereDate('created_at', '>=', $hace7Dias)
-                ->groupBy(DB::raw('DATE(created_at)'))
+                ->whereDate('fecha', '>=', $hace7Dias)
+                ->groupBy(DB::raw('DATE(fecha)'))
                 ->orderBy('fecha')
                 ->get();
 
@@ -68,13 +68,13 @@ class EstadisticasController extends Controller
         });
 
         // Preparar datos para la vista
-        $productoNombre = $stats['productoMasVendido'] 
-            ? "{$stats['productoMasVendido']->producto_nombre} ({$stats['productoMasVendido']->total_vendido} vendidos)"
-            : 'No hay ventas';
+        $productoNombre = $stats['productoMasVendido']->producto_nombre ?? 'No hay ventas';
+        $productoCantidad = $stats['productoMasVendido']->total_vendido ?? 0;
 
         return view('admin', array_merge($stats, [
             'productoNombre' => $productoNombre,
+            'productoCantidad' => $productoCantidad,
             'productoId' => $stats['productoMasVendido']->producto_id ?? null
-        ]));
-    }
+            ]));
+        }
 }
