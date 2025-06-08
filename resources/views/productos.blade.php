@@ -21,7 +21,7 @@
                     
                    <div class="card h-100" onclick="window.location='{{ route('productoinfo', ['id' => $producto->id]) }}'" style="cursor: pointer;">
                         <!-- Imagen del producto -->
-                        <img class="card-img-top" src="{{ $producto->imagen ?? 'https://dummyimage.com/450x300/dee2e6/6c757d.jpg' }}" alt="{{ $producto->nombre }}" />
+                        <img class="card-img-top" src="{{ asset($producto->imagen) ?? 'https://dummyimage.com/450x300/dee2e6/6c757d.jpg' }}" alt="{{ $producto->nombre }}" />
 
                         <!-- Detalles del producto -->
                         <div class="card-body p-4">

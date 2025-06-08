@@ -73,10 +73,12 @@ Route::get('/admin', function () {
         return view('admin');
 })->middleware(['auth', 'verified'])->name('admin');
 
+
 Route::get('/', [InformacionController::class, 'inicio'])->name('welcome');
 Route::get('/productoinfo/{id}', [InformacionController::class, 'productoinfo'])->name('productoinfo');
 Route::get('/acercadenosotros', [InformacionController::class, 'acercadenosotros'])->name('acercadenosotros');
 Route::get('/tienda', [InformacionController::class, 'index'])->name('tienda.productos');
+Route::get('/productos/buscar', [ProductosController::class, 'buscar'])->name('productos.buscar');
 
 
 

@@ -121,7 +121,7 @@
             display: inline-block;
         }
         
-        .descripcion-producto {
+        .descripcion-producto div {
             color: #495057;
             font-size: 0.95rem;
             line-height: 1.5;
@@ -130,8 +130,8 @@
         }
 
         .descripcion-producto strong {
-            display: block;
             text-align: left;
+            display: block;
         }
         
         .btn-group-custom {
@@ -180,8 +180,7 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 12px rgba(220, 53, 69, 0.25);
         }
-        
-       
+            
         .modal-content {
             border-radius: 15px;
             border: none;
@@ -236,7 +235,7 @@
             font-size: 1rem;
             transition: all 0.3s ease;
         }
-        
+            
         .form-control:focus {
             border-color: var(--azul-claro);
             box-shadow: 0 0 0 0.2rem rgba(26, 58, 108, 0.2);
@@ -312,115 +311,115 @@
             background: linear-gradient(135deg, var(--azul-secundario), var(--azul-principal));
         }
         
-       .img-preview-container {
+        .img-preview-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 15px 0;
+            margin-bottom: 20px;
+            background-color: var(--gris-claro);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px dashed var(--azul-claro);
+        }
+        
+        .img-preview-label {
+            font-weight: 600;
+            color: var(--azul-principal);
+            margin-bottom: 10px;
+        }
+        
+        .img-preview {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+            border: 1px solid var(--gris-medio);
+
+        }
+        
+        .img-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+            
+            
+        .mensaje-exito i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        
+        @media (max-width: 992px) {
+            .table-responsive {
+                overflow-x: auto;
+            }
+            
+            .table {
+                min-width: 900px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .modal-dialog {
+                margin: 1rem;
+            }
+            
+            .modal-body .row > [class*="col-"] {
+                margin-bottom: 15px;
+            }
+        }
+
+        .search-form {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 15px 0;
         margin-bottom: 20px;
-        background-color: var(--gris-claro);
-        padding: 15px;
-        border-radius: 10px;
-        border: 1px dashed var(--azul-claro);
-    }
-    
-    .img-preview-label {
-        font-weight: 600;
-        color: var(--azul-principal);
-        margin-bottom: 10px;
-    }
-    
-    .img-preview {
-        max-width: 200px;
-        max-height: 200px;
-        border-radius: 8px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        margin-bottom: 10px;
-        border: 1px solid var(--gris-medio);
-
-    }
-    
-    .img-actions {
-        display: flex;
-        gap: 10px;
-        margin-top: 10px;
-    }
-        
-        
-    .mensaje-exito i {
-        margin-right: 10px;
-        font-size: 1.2rem;
-    }
-    
-    .form-textarea {
-        min-height: 100px;
-        resize: vertical;
-    }
-
-    
-    @media (max-width: 992px) {
-        .table-responsive {
-            overflow-x: auto;
+        max-width: 500px;
+        position: relative;
         }
-        
-        .table {
-            min-width: 900px;
+
+        .search-input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #e1e5eb;
+            border-radius: 30px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
-    }
-    
-    @media (max-width: 768px) {
-        .modal-dialog {
-            margin: 1rem;
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--azul-claro);
+            box-shadow: 0 2px 15px rgba(26, 58, 108, 0.2);
         }
-        
-        .modal-body .row > [class*="col-"] {
-            margin-bottom: 15px;
+
+        .search-button {
+            background: linear-gradient(135deg, var(--azul-principal), var(--azul-secundario));
+            color: white !important;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 25px;
+            font-weight: 600;
+            margin-left: -50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(26, 58, 108, 0.25);
+            display: flex;
+            align-items: center;
         }
-    }
 
-    .search-form {
-    display: flex;
-    margin-bottom: 20px;
-    max-width: 500px;
-    position: relative;
-    }
-
-    .search-input {
-        flex: 1;
-        padding: 12px 20px;
-        border: 2px solid #e1e5eb;
-        border-radius: 30px;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    .search-input:focus {
-        outline: none;
-        border-color: var(--azul-claro);
-        box-shadow: 0 2px 15px rgba(26, 58, 108, 0.2);
-    }
-
-    .search-button {
-        background: linear-gradient(135deg, var(--azul-principal), var(--azul-secundario));
-        color: white !important;
-        border: none;
-        border-radius: 30px;
-        padding: 12px 25px;
-        font-weight: 600;
-        margin-left: -50px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(26, 58, 108, 0.25);
-        display: flex;
-        align-items: center;
-    }
-
-    .search-button:hover {
-        background: linear-gradient(135deg, var(--azul-secundario), var(--azul-principal));
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(26, 58, 108, 0.35);
-    }
+        .search-button:hover {
+            background: linear-gradient(135deg, var(--azul-secundario), var(--azul-principal));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 58, 108, 0.35);
+        }
     </style>
 @stop
 
@@ -580,7 +579,25 @@
                                                 <label for="modo_de_uso{{ $producto->id }}" class="form-label">Modo de Uso</label>
                                                 <textarea class="form-control form-textarea" id="modo_de_uso{{ $producto->id }}" name="modo_de_uso" required>{{ $producto->modo_de_uso }}</textarea>
                                             </div>
+                                            <div class="form-group col-md-12 ms-2"> 
+                                                <div class="form-check">
+                                                    <input 
+                                                        type="checkbox" 
+                                                        class="form-check-input" 
+                                                        id="promocion{{ $producto->id }}" 
+                                                        name="promocion" 
+                                                        value="1"
+                                                        {{ $producto->promocion ? 'checked' : '' }}
+                                                    >
+                                                    <label class="form-check-label" for="promocion{{ $producto->id }}">
+                                                        Promoción
+                                                    </label>
+                                                </div>
+                                            </div>
+
+
                                         </div>
+
 
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>
@@ -653,6 +670,11 @@
                             <label for="modo_de_uso" class="form-label">Modo de Uso</label>
                             <textarea class="form-control form-textarea" name="modo_de_uso" required placeholder="Modo de uso del producto"></textarea>
                         </div>
+                        
+                        <div class="form-group col-md-12">
+                            <input type="checkbox" name="promocion" value="1"> Promoción
+                        </div>
+
                     </div>
 
                     <div class="modal-footer">

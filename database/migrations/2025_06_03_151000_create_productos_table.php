@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('modo_de_uso');
             $table->decimal('precio', 8, 2);
             $table->unsignedBigInteger('categoria_id')->nullable();;
+            $table->boolean('promocion')->default(false);
             $table->timestamps();
 
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('set null');

@@ -18,6 +18,7 @@ class Producto extends Model
         'modo_de_uso',
         'precio',
         'categoria_id',
+        'promocion',
     ];
 
     public function categoria()
