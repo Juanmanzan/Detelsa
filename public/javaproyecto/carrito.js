@@ -219,6 +219,27 @@ async function finalizarPedido(event) {
   }
 
   try {
+    // Obtener carrito actual
+    const carritoResponse = await fetch("/carrito/mostrar");
+    const carrito = await carritoResponse.json();
+
+    // Enviar carrito al backend para crear orden
+    const crearOrden = await fetch("/orden/crear", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": csrfToken
+      },
+      body: JSON.stringify({ carrito: carrito })
+    });
+
+    const crearOrdenData = await crearOrden.json();
+
+    if (!crearOrden.ok || !crearOrdenData.success) {
+      throw new Error('No se pudo crear la orden');
+    }
+
+    // Luego vaciar el carrito
     const response = await fetch('/carrito/vaciar', {
       method: 'POST',
       headers: {
@@ -228,16 +249,7 @@ async function finalizarPedido(event) {
     });
 
     if (!response.ok) {
-      throw new Error(`Error HTTP: ${response.status}`);
-    }
-
-    // Manejar el posible JSON o texto vacío
-    let data = {};
-    try {
-      const text = await response.text();
-      data = text ? JSON.parse(text) : {};
-    } catch (jsonError) {
-      console.warn('Respuesta no es un JSON válido:', jsonError);
+      throw new Error(`Error HTTP al vaciar carrito: ${response.status}`);
     }
 
     if (typeof actualizarContadorCarrito === 'function') {
@@ -255,7 +267,7 @@ async function finalizarPedido(event) {
     }, 300);
 
     if (typeof mostrarToast === 'function') {
-      mostrarToast(data.message || '¡Pedido enviado por WhatsApp!');
+      mostrarToast('¡Pedido enviado por WhatsApp y almacenado!');
     }
 
   } catch (error) {

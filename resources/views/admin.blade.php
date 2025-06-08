@@ -86,8 +86,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admincolores.css">
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="/css/admincolores.css"> 
 @stop
 
 @section('js')

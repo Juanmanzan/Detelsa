@@ -8,6 +8,7 @@ use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\InformacionController;
 use App\Http\Controllers\ContrasenaController;
+use App\Http\Controllers\OrdenController;
 
 
 
@@ -44,6 +45,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/productos/{id}/edit', [ProductosController::class, 'edit'])->name('productos.edit');
     Route::put('/productos/{id}', [ProductosController::class, 'update'])->name('productos.update');
     Route::delete('/productos/{id}', [ProductosController::class, 'destroy'])->name('productos.destroy');
+
+    Route::get('/ordenes', [OrdenController::class, 'index']);
+
     
     Route::get('perfil', [PerfilController::class, 'index'])->name('perfil.index');
     Route::post('perfil', [PerfilController::class, 'store'])->name('perfil.store');
@@ -80,13 +84,11 @@ Route::get('/acercadenosotros', [InformacionController::class, 'acercadenosotros
 Route::get('/tienda', [InformacionController::class, 'index'])->name('tienda.productos');
 Route::get('/productos/buscar', [ProductosController::class, 'buscar'])->name('productos.buscar');
 
-
-
-
 Route::post('/carrito/agregar', [CarritoController::class, 'agregar']);
 Route::post('/carrito/vaciar', [CarritoController::class, 'vaciar']);
 Route::get('/carrito/mostrar', [CarritoController::class, 'mostrar']);
 Route::post('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar']);
 Route::get('/carrito/contador', [CarritoController::class, 'contador']);
+Route::post('/orden/crear', [OrdenController::class, 'crear']);
 
 require __DIR__.'/auth.php';

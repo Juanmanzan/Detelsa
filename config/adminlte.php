@@ -316,7 +316,7 @@ return [
         ],
         [
             'text' => 'Ordenes generadas',
-            'url' => 'admin/settings',
+            'url' => 'ordenes',
             'icon' => 'fas fa-receipt',
         ],
         [
