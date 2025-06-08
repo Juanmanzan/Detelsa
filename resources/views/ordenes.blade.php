@@ -16,6 +16,12 @@
 @stop
 @section('content')
 
+    <form class="search-form">
+        <input type="text" id="search-input" placeholder="Buscar..." class="search-input">
+        <button type="button" id="search-button" class="search-button">
+            🔍 Buscar
+        </button>
+    </form>
 
     <div class="table-container">
         <div class="table-responsive">
@@ -36,7 +42,7 @@
                         @php $rowspan = $orden->detalles->count(); @endphp
 
                         @foreach($orden->detalles as $i => $detalle)
-                            <tr>
+                            <tr data-orden="{{ $orden->id }}">
                                 @if ($i === 0)
                                     <td rowspan="{{ $rowspan }}" class="align-middle">
                                         <strong>{{ $orden->id }}</strong>
@@ -52,8 +58,10 @@
                                 <td class="precio-producto">
                                     ${{ number_format($detalle->precio_unitario, 2) }}
                                 </td>
-                                <td>{{ $detalle->cantidad }}</td>
-                                <td class="precio-producto">
+                                <td class="cantidad-producto">
+                                    {{ $detalle->cantidad }}
+                                </td>
+                                <td class="sub-precio">
                                     ${{ number_format($detalle->subtotal, 2) }}
                                 </td>
 
@@ -79,40 +87,4 @@
 @endsection
 
 @section('js')
-<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-<script>
-    $(document).ready(function() {
-        // Función para buscar órdenes
-        function searchOrders() {
-            const searchTerm = $('#search-input').val().toLowerCase().trim();
-            
-            $('.orden-card').each(function() {
-                const $card = $(this);
-                const orderText = $card.text().toLowerCase();
-                
-                if (orderText.includes(searchTerm)) {
-                    $card.show();
-                } else {
-                    $card.hide();
-                }
-            });
-        }
-
-        // Evento para el botón de búsqueda
-        $('#search-button').click(searchOrders);
-        
-        // Evento para búsqueda al presionar Enter
-        $('#search-input').keyup(function(e) {
-            if (e.key === 'Enter') searchOrders();
-        });
-        
-        // Evento para limpiar búsqueda
-        $('#search-input').on('input', function() {
-            if (!$(this).val()) {
-                $('.orden-card').show();
-            }
-        });
-    });
-</script>
+<script src="{{ asset('javaproyecto/buscarod.js') }}"></script>
