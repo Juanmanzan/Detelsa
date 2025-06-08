@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detelsa - Detergentes de Calidad</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="{{ asset('vendor/bootstrap/js/bootstrap5.bundle.min.js') }}"></script>    
     <script src="{{ asset('javaproyecto/productosmain.js') }}"></script>
     <script src="{{ asset('javaproyecto/carrito.js') }}"></script>
-
+    <script src="{{ asset('javaproyecto/productosinfo.js') }}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         :root {
@@ -322,7 +322,6 @@
     </style>
 </head>
 <body>
-
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container-xl px-4">
@@ -375,6 +374,13 @@
                             <span class="cart-badge" id="cart-count">0</span>
                         </a>
                     </li>
+
+                    <li class="nav-item position-relative ms-2">
+                        <a href="/acercadenosotros" class="btn nav-btn">
+                            <i class="fas fa-info-circle"></i> <span>Acerca de nosotros</span>
+                        </a>
+                    </li>
+
                 </ul>
             </div>
         </div>
@@ -469,16 +475,5 @@
         </div>
     </div>
 </footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    // Simulación de actualización del carrito
-    document.addEventListener('DOMContentLoaded', function() {
-        // Ejemplo: Actualizar contador del carrito
-        const cartCount = document.getElementById('cart-count');
-        const cartTotal = document.getElementById('cart-total');
-        const cartFooter = document.getElementById('cart-footer');      
-    });
-</script>
 </body>
 </html>

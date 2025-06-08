@@ -276,37 +276,59 @@ async function finalizarPedido(event) {
   }
 }
 
-//Mensaje de wp 
+//mensaje de whattsapp
+
 function enviarProductoWhatsApp(boton) {
-  const card = boton.closest('.card');
+  event.stopPropagation(); // Detiene propagación si es necesario
+
+  const card = boton.closest('.product-card'); // CAMBIADO
   if (!card) {
     alert('No se pudo obtener el producto');
-    return;
+    return false;
   }
 
-  // Obtener nombre del producto
-  const nombre = card.querySelector('.fw-bolder')?.textContent.trim();
-  // Obtener precio del producto
-  const precioTexto = card.querySelector('p')?.textContent.trim();
+  const nombre = card.querySelector('.product-name')?.textContent.trim();
+  
+  const precioTexto = card.querySelector('.product-price')?.textContent.trim();
 
   if (!nombre || !precioTexto) {
+    alert('Datos incompletos del producto');
+    return false;
+  }
+
+  const mensaje = `Hola, estoy interesado en el producto:\n📦 *${nombre}*\n💰 Precio: ${precioTexto}`;
+
+  const numero = '593964131003';
+  const url = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensaje)}`;
+
+  window.open(url, '_blank');
+
+  if (typeof mostrarToast === 'function') {
+    mostrarToast('Redirigiendo a WhatsApp...');
+  }
+
+  return false;
+}
+
+function enviarProductoWhatsApp(boton, productoId) {
+  const nombre = document.querySelector('.product-name')?.textContent.trim();
+  const precio = document.querySelector('.product-price')?.textContent.trim();
+
+  if (!nombre || !precio) {
     alert('Datos incompletos del producto');
     return;
   }
 
-  const mensaje = `Hola, estoy interesado en el producto: ${nombre}\nPrecio: ${precioTexto}`;
+  const mensaje = `Hola, estoy interesado en el producto:\n📦 *${nombre}*\n💰 Precio: ${precio}`;
 
-  // Reemplaza el número de WhatsApp con el tuyo real
   const numero = '593964131003';
   const url = `https://api.whatsapp.com/send?phone=${numero}&text=${encodeURIComponent(mensaje)}`;
-
-  // Abrir WhatsApp
   window.open(url, '_blank');
 
-  // (Opcional) Toast de confirmación
   if (typeof mostrarToast === 'function') {
     mostrarToast('Redirigiendo a WhatsApp...');
   }
 }
+
 
 
