@@ -19,8 +19,7 @@ cmds = [
 [phases.static_assets]
 cmds = [
   "mkdir -p public/css public/vendor/bootstrap/css public/javaproyecto",
-  "cp -r resources/static/css/* public/css/",
-  "cp -r resources/static/js/* public/javaproyecto/",
+  "# No copiamos CSS ni JS porque ya están en public/",
   "cp -r node_modules/bootstrap/dist/css/bootstrap.min.css public/vendor/bootstrap/css/bootstrap.min.css"
 ]
 
