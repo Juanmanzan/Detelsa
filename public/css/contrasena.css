@@ -1,0 +1,176 @@
+
+:root {
+    --detelsa-primary: #2A7B9B;
+    --detelsa-secondary: #3CC274;
+    --detelsa-gradient: linear-gradient(135deg, var(--detelsa-primary), var(--detelsa-secondary), var(--detelsa-primary));
+}
+
+body {
+    background: var(--detelsa-gradient);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-box {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    border: none;
+    background: white;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+.card-header {
+    background: white;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    padding: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-right: none;
+}
+
+.form-control {
+    border-left: none;
+    padding-left: 10px;
+    height: 45px;
+}
+
+.btn-primary {
+    background: linear-gradient(to right, var(--detelsa-primary), var(--detelsa-secondary));
+    border: none;
+    padding: 12px;
+    font-weight: 600;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.password-strength {
+    height: 5px;
+    background: #eee;
+    border-radius: 3px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+.strength-meter {
+    height: 100%;
+    width: 0%;
+    background: #b21f1f;
+    transition: width 0.3s;
+}
+
+.hidden {
+    display: none;
+}
+
+.alert {
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.logo-container {
+    text-align: center;
+    padding: 15px 0;
+}
+
+.logo-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--detelsa-primary);
+}
+
+.app-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--detelsa-primary);
+    margin-top: 10px;
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: var(--detelsa-primary);
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.back-link:hover {
+    color: var(--detelsa-secondary);
+    text-decoration: underline;
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+    color: #444;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    color: white;
+    font-size: 14px;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.note {
+    font-size: 13px;
+    color: #6c757d;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}

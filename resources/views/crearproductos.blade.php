@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-
+<link rel="icon" href="{{ asset('favicon_io/favicon.ico') }}" type="image/x-icon">
 @section('title', 'Productos')
 
 @section('css')

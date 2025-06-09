@@ -8,6 +8,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Productos</title>
+        <link rel="icon" href="{{ asset('favicon_io/favicon.ico') }}" type="image/x-icon">
     </head>
 
     <body>

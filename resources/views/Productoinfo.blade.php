@@ -3,6 +3,7 @@
 
 @push('styles')
 <link rel="stylesheet" href="{{ asset('css/productosinfo.css') }}">
+
 @endpush
 
 <div class="product-detail-container">

@@ -5,94 +5,8 @@
 @section('css')
 <link rel="stylesheet" href="/css/admincolores.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<style>
-    .tarjeta-prioridad-1 {
-        width: 50%;
-        margin-left: 10%;
-        margin-bottom: 2rem;
-        border: 1px solid #ccc;
-        padding: 20px;
-        background-color: transparent;
-        border-radius: 10px;
-    }
-
-    .titulo-prioridad-1 {
-        font-weight: bold;
-    }
-
-    .contenido-prioridad-1 {
-        display: flex;
-        align-items: flex-start;
-        margin-top: 10px;
-    }
-
-    .contenido-prioridad-1 img {
-        width: 300px;
-        height: 200px;
-        object-fit: cover;
-        margin-right: 15px;
-    }
-
-    .contenido-prioridad-1 p {
-        font-size: 1.5rem;
-        flex: 1;
-    }
-
-    .botones {
-        display: flex;
-        gap: 10px;
-        margin-top: 15px;
-    }
-
-    .contenedor-prioridad-2 {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: space-between;
-        margin: 30px 10%;
-    }
-
-    .tarjeta-prioridad-2 {
-        width: 30%;
-        background-color: white;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 15px;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .tarjeta-prioridad-2 img {
-        width: 100%;
-        height: 150px;
-        object-fit: cover;
-        border-radius: 4px;
-        margin-bottom: 10px;
-    }
-
-    .tarjeta-prioridad-2 h5 {
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 10px;
-    }
-
-    .tarjeta-prioridad-2 p {
-        font-size: 1.3rem;
-        text-align: justify;
-    }
-
-    .tarjeta-prioridad-1:hover,
-    .tarjeta-prioridad-2:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease;
-    }
-    
-  
-
-</style>
+<link rel="stylesheet" href="/css/perfil.css">
+<link rel="icon" href="{{ asset('favicon_io/favicon.ico') }}" type="image/x-icon">
 @stop
 
 @section('content_header')
@@ -177,53 +91,69 @@
 
 <div class="container mt-4">
 
-<!-- Tarjetas prioridad 1 -->
-@foreach ($contenido as $item)
-    @if($item->prioridad == 1)
-    <div class="tarjeta-prioridad-1">
-        <h3 class="titulo-prioridad-1">{{ $item->titulo }}</h3>
-        <div class="contenido-prioridad-1">
-            @if ($item->imagen)
-            <img src="{{ asset($item->imagen) }}" alt="{{ $item->titulo }}">
-            @endif
-            <p>{{ $item->contenido }}</p>
-        </div>
-        <div class="botones">
-            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarContenidoModal{{ $item->id }}">Editar</button>
-            <form action="{{ route('perfil.destroy', $item->id) }}" method="POST" style="display:inline-block;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar este contenido?')">Eliminar</button>
-            </form>
-        </div>
-    </div>
-    @endif
-@endforeach
-
-<!-- Tarjetas prioridad 2 -->
-<div class="contenedor-prioridad-2">
+    <!-- Tarjetas prioridad 1 -->
     @foreach ($contenido as $item)
-        @if($item->prioridad == 2)
-        <div class="tarjeta-prioridad-2">
-            <h5>{{ $item->titulo }}</h5>
-            @if ($item->imagen)
-            <img src="{{ asset($item->imagen) }}" alt="{{ $item->titulo }}">
-            @endif
-            <p>{{ $item->contenido }}</p>
-            <div class="botones">
-                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarContenidoModal{{ $item->id }}">Editar</button>
-                <form action="{{ route('perfil.destroy', $item->id) }}" method="POST" style="display:inline-block;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar este contenido?')">Eliminar</button>
-                </form>
+        @if($item->prioridad == 1)
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h3 class="titulo-prioridad-1">{{ $item->titulo }}</h3>
+                    <div class="d-flex flex-wrap flex-md-nowrap align-items-center">
+                        @if ($item->imagen)
+                            <img src="{{ asset($item->imagen) }}" alt="{{ $item->titulo }}" class="imagen-prioridad-1">
+                        @endif
+                        <p class="contenido-prioridad-1">{{ $item->contenido }}</p>
+                    </div>
+                    <div class="botones-izquierda">
+                        <button type="button" class="btn btn-accion btn-editar" data-toggle="modal" data-target="#editarContenidoModal{{ $item->id }}">
+                            <i class="fas fa-edit mr-1"></i> Editar
+                        </button>
+                        <form action="{{ route('perfil.destroy', $item->id) }}" method="POST" onsubmit="return confirm('¿Está seguro de eliminar este contenido?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-accion btn-eliminar">
+                                <i class="fas fa-trash mr-1"></i> Eliminar
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>
         @endif
     @endforeach
+
+    <!-- Tarjetas prioridad 2 -->
+    <div class="row">
+        @foreach ($contenido as $item)
+            @if($item->prioridad == 2)
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="titulo-prioridad-2">{{ $item->titulo }}</h5>
+                            @if ($item->imagen)
+                                <img src="{{ asset($item->imagen) }}" alt="{{ $item->titulo }}" class="imagen-prioridad-2">
+                            @endif
+                            <p class="contenido-prioridad-2 flex-grow-1">{{ $item->contenido }}</p>
+                            <div class="d-flex justify-content-center gap-2 mt-2">
+                                <button type="button" class="btn btn-accion btn-editar" data-toggle="modal" data-target="#editarContenidoModal{{ $item->id }}">
+                                    <i class="fas fa-edit mr-1"></i> Editar
+                                </button>
+                                <form action="{{ route('perfil.destroy', $item->id) }}" method="POST" onsubmit="return confirm('¿Está seguro de eliminar este contenido?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-accion btn-eliminar mx-3">
+                                        <i class="fas fa-trash mr-1"></i> Eliminar
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    </div>
+
 </div>
 
-<!-- Modales de edición -->
+<!-- editar modal -->
 @foreach ($contenido as $item)
 <div class="modal fade" id="editarContenidoModal{{ $item->id }}" tabindex="-1" aria-labelledby="editarContenidoModalLabel{{ $item->id }}" aria-hidden="true">
     <div class="modal-dialog">
