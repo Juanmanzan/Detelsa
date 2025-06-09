@@ -5,19 +5,24 @@ nixPkgs = [
   "nodejs_20"
 ]
 
-[phases.build]
+[phases.install]
 cmds = [
   "composer install --no-interaction --prefer-dist --optimize-autoloader",
-  "npm install",
+  "npm install"
+]
+
+[phases.build]
+cmds = [
   "npm run build"
 ]
 
-[phases.start]
+[phases.static_assets]
 cmds = [
-  "php artisan config:cache",
-  "php artisan migrate --force",
-  "php -S 0.0.0.0:$PORT -t public"
+  "mkdir -p public/css public/vendor/bootstrap/css public/javaproyecto",
+  "cp -r resources/static/css/* public/css/",
+  "cp -r resources/static/js/* public/javaproyecto/",
+  "cp -r node_modules/bootstrap/dist/css/bootstrap.min.css public/vendor/bootstrap/css/bootstrap.min.css"
 ]
 
 [start]
-cmd = "php -S 0.0.0.0:$PORT -t public"
+cmd = "php artisan config:cache && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT"
