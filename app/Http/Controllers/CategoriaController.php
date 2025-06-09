@@ -25,7 +25,7 @@ class CategoriaController extends Controller
     {
         // Validación
         $request->validate([
-            'nombre' => 'required|string|max:40',
+            'nombre' => 'required|string|max:250',
             'imagen' => 'required|image',
         ]);
 
@@ -72,7 +72,7 @@ class CategoriaController extends Controller
         $categoria = Categoria::findOrFail($id);
 
         $request->validate([
-            'nombre' => 'required|string|max:40'. $categoria->id,
+            'nombre' => 'required|string|max:250'. $categoria->id,
             'imagen' => 'nullable|image',
         ]);
 

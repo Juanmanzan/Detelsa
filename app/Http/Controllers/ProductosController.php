@@ -25,7 +25,7 @@ class ProductosController extends Controller
     {
         $request->validate([
             'imagen' => 'required|image',
-            'nombre' => 'required|string|max:40',
+            'nombre' => 'required|string|max:250',
             'descripcion' => 'required|string|max:1000',
             'ingredientes' => 'required|string|max:1000',
             'modo_de_uso' => 'required|string|max:1000',
@@ -68,7 +68,7 @@ class ProductosController extends Controller
 
         $request->validate([
             'imagen' => 'nullable|image',
-            'nombre' => 'required|string|max:40',
+            'nombre' => 'required|string|max:250',
             'descripcion' => 'required|string|max:1000',
             'ingredientes' => 'required|string|max:1000',
             'modo_de_uso' => 'required|string|max:1000',

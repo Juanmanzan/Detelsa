@@ -22,8 +22,8 @@ class PerfilController extends Controller
     {
         $request->validate([
             'imagen' => 'nullable|image',
-            'titulo' => 'required|string|max:40',
-            'contenido' => 'required|string|max:1000',
+            'titulo' => 'required|string|max:250',
+            'contenido' => 'required|string|max:5000',
             'prioridad' => 'required|integer',
         ]);
 

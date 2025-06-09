@@ -78,15 +78,29 @@
                                
                                  <div><strong>Ingredientes:</strong><br>
                                     <ul>
-                                        @foreach(explode("\n", $producto->ingredientes) as $linea)
-                                            @if(trim($linea) !== '')
-                                                <li>{{ $linea }}</li>
+                                         @foreach(preg_split('/[\r\n|\r|\n,]+/', $producto->ingredientes) as $ingrediente)
+                                            @php
+                                                $ingrediente = preg_replace('/^[\s\.\-\:\•\·]+/', '', trim($ingrediente));
+                                            @endphp
+                                            @if($ingrediente !== '')
+                                                <li>{{ $ingrediente }}</li>
                                             @endif
                                         @endforeach
                                     </ul>
                                 </div>
 
-                                <div><strong>Modo de Uso:</strong><br>{{ Str::limit($producto->modo_de_uso, 100) }}</div>
+                                <div><strong>Modo de Uso:</strong><br>
+                                 
+                                    @foreach(preg_split('/[\r\n|\r|\n,]+/', $producto->modo_de_uso) as $modo)
+                                        @php
+                                            $modo = preg_replace('/^[\s\.\-\:\•\·]+/', '', trim($modo));
+                                        @endphp
+                                        @if($modo !== '')
+                                            <p>{{ $modo }}</p>
+                                        @endif
+                                    @endforeach
+                               </div>
+
                             </td>
                             <td>
                                 <div class="btn-group-custom">

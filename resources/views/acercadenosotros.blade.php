@@ -11,7 +11,6 @@
             background-color: #f8f9fa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #333;
-            padding-bottom: 30px;
         }
         
         .container {

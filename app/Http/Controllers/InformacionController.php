@@ -20,10 +20,10 @@ class InformacionController extends Controller
         $producto = Producto::findOrFail($id);
         $productosRelacionados = Producto::where('categoria_id', $producto->categoria_id)
                                     ->where('id', '!=', $producto->id)
-                                    ->take(4) // Limitar a 4 por ejemplo
+                                    ->take(4) 
                                     ->get();
         $categorias = Categoria::all();
-        return view('productoinfo', compact('producto', 'productosRelacionados', 'categorias'));
+        return view('Productoinfo', compact('producto', 'productosRelacionados', 'categorias'));
     }
 
     public function acercadenosotros()

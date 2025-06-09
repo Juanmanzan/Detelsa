@@ -39,12 +39,11 @@
                 <button class="product-details-toggle" id="btn-vermas">
                     <i class="fas fa-chevron-down"></i> Ver detalles del producto
                 </button>
-                
                 <div class="product-details-content" id="product-details-content">
                     <div class="details-section">
                         <h4 class="details-title">Ingredientes</h4>
                         <ul class="ingredients-list">
-                            @foreach(preg_split('/\r\n|\r|\n/', $producto->ingredientes) as $ingrediente)
+                            @foreach(preg_split('/[\r\n|\r|\n,]+/', $producto->ingredientes) as $ingrediente)
                                 @php
                                     $ingrediente = preg_replace('/^[\s\.\-\:\•\·]+/', '', trim($ingrediente));
                                 @endphp
@@ -54,12 +53,17 @@
                             @endforeach
                         </ul>
                     </div>
-                    
                     <div class="details-section">
                         <h4 class="details-title">Modo de uso</h4>
-                        <p>{{ $producto->modo_de_uso }}</p>
+                        @foreach(preg_split('/[\r\n|\r|\n,]+/', $producto->modo_de_uso) as $modo)
+                            @php
+                                $modo = preg_replace('/^[\s\.\-\:\•\·]+/', '', trim($modo));
+                            @endphp
+                            @if($modo !== '')
+                                <p>{{ $modo }}</p>
+                            @endif
+                        @endforeach
                     </div>
-                </div>
             </div>
         </div>
         
