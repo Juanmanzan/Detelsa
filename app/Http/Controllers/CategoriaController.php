@@ -107,7 +107,7 @@ class CategoriaController extends Controller
 
         // AJAX response
         if ($request->ajax()) {
-            return response()->json(['mensaje' => 'Categoría actualizada correctamente']);
+            return response()->json(['success' => 'Categoría actualizada correctamente']);
         }
 
         return redirect()->route('categorias.index')->with('success', 'Categoría actualizada correctamente');

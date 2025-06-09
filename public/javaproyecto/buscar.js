@@ -32,12 +32,7 @@ $(document).ready(function() {
             }
         });
     });
-
-
-
-
-
-    
+    // Enviar formulario editar categoría con AJAX    
 
     $('#formEditarCategoria').submit(function(e) {
         e.preventDefault();
@@ -54,6 +49,7 @@ $(document).ready(function() {
             success: function(response) {
                 $('#alerta-error-nombre-editar').hide();
                 $('#editarCategoriaModal').modal('hide');
+                sessionStorage.setItem('mensaje_exito', response.success);
                 location.reload();
             },
             error: function(xhr) {
