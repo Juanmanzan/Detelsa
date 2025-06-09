@@ -13,7 +13,7 @@ class ProductosController extends Controller
         $productos = Producto::all();
         $categorias = Categoria::all(); 
 
-        return view('Crearproductos', compact('productos', 'categorias')); 
+        return view('crearproductos', compact('productos', 'categorias')); 
     }
 
     public function create()
