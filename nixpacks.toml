@@ -8,14 +8,14 @@ nixPkgs = [
 
 [phases.build]
 cmds = [
-  "composer install --no-interaction --prefer-dist --optimize-autoloader",
-  "npm install",
-  "npm run build"
+  "composer install --no-interaction --prefer-dist --optimize-autoloader || { echo 'Composer install failed'; exit 1; }",
+  "npm install || { echo 'npm install failed'; exit 1; }",
+  "npm run build || { echo 'npm run build failed'; exit 1; }"
 ]
 
 [phases.start]
 cmds = [
-  "php artisan migrate --force",
   "php artisan config:cache",
+  "php artisan migrate --force || { echo 'Migration failed'; exit 1; }",
   "php artisan serve --host=0.0.0.0 --port=$PORT"
 ]
