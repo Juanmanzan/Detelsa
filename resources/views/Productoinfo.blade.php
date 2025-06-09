@@ -82,7 +82,7 @@
 
                         <div class="related-image-container" 
                         style="background-image: url('{{ asset($prod->imagen) }}');
-                                background-size: cover;
+                                background-size: contain;
                                 background-position: center;
                                 background-repeat: no-repeat;">
                     </div>
