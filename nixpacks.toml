@@ -3,6 +3,7 @@ nixPkgs = [
   "php82", 
   "php82Packages.composer", 
   "nodejs_20"
+  "nginx"
 ]
 
 [phases.build]
