@@ -43,10 +43,14 @@
 }
 
 .product-description {
-    font-size: 1.1rem;
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
+    color: #495057;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    text-align: left;
+    padding: 8px;
+    word-wrap: break-word;         /* Para cortar palabras largas */
+    overflow-wrap: break-word;     /* Recomendado por compatibilidad */
+    white-space: normal;  
 }
 
 .product-price {

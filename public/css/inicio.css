@@ -1,7 +1,7 @@
 
     .welcome-page {
-        --primary-color: #198754;
-        --secondary-color: #3CC274;
+        --primary-color: #2C8CD8;
+        --secondary-color: #528D05;
         --accent-color: #FF6B6B;
         --light-bg: #f8f9fa;
         --dark-text: #333;
@@ -277,10 +277,15 @@
         color: #fff;
     }
     
-    .welcome-page .promo-desc {
+    .promo-desc {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;  /* Cambia el número a la cantidad de líneas que quieras */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: #ddd;  /* Mantén el color que ya tienes */
         font-size: 16px;
         margin-bottom: 15px;
-        color: #ddd;
     }
     
     .welcome-page .promo-price {

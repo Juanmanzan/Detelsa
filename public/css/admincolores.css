@@ -1,8 +1,42 @@
-.main-sidebar {
-    background-color: #198754 !important;
+
+:root {
+    --primary: #2C8CD8;
+    --primary-dark: #0d6e3f;
 }
 
-/* Cambiar fondo navbar superior */
-.main-header .navbar {
-    background-color: #198754 !important;
+.main-sidebar {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+     
 }
+
+.sidebar-mine{
+
+    width: 100%;
+
+}
+
+.logo-circular-fondo {
+    background-color: #ffffff; 
+    border-radius: 50%;        
+    padding: 5px;              
+}
+
+
+.content-wrapper {
+    all: unset; 
+}
+
+
+.content-wrapper {
+    background-color: #f4f6f9;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: margin-left 0.3s ease-in-out;
+    margin-left: 250px;
+    z-index: 800;
+    padding-bottom: 30px;
+}
+
+

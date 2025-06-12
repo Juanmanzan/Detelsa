@@ -136,10 +136,10 @@
             <!-- Contact Info -->
             <div class="col-md-4 mb-4 mb-md-0">
                 <h5>Encuéntranos</h5>
-                <ul>
-                    <li><i class="fas fa-map-marker-alt"></i> Calle Ejemplo #123, Ciudad</li>
-                    <li><i class="fas fa-phone"></i> (555) 123-4567</li>
-                    <li><i class="fas fa-envelope"></i> <a href="mailto:detelsa@gmail.com" class="text-white">detelsa@gmail.com</a></li>
+                <ul class = "etiquetas">
+                    <li><i class="fas fa-map-marker-alt"></i> Riobamba Ecuador</li>
+                    <li><i class="fas fa-phone"></i>+593 98 262 1340</li>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:detelsa445@gmail.com" class="text-white">detelsa445@gmail.com</a></li>
                     <li><i class="fas fa-clock"></i> Lunes a Viernes: 9:00 AM - 6:00 PM</li>
                 </ul>
             </div>
@@ -155,9 +155,9 @@
             <div class="col-md-4">
                 <h5>Síguenos</h5>
                 <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    
+                    <a href="https://www.tiktok.com/@jc.clean3?is_from_webapp=1&sender_device=pc" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://wa.me/593982621340?text=Hola,%20estoy%20interesado%20en%20conocer%20m%C3%A1s%20sobre%20su%20negocio" class="social-link"><i class="fab fa-whatsapp"></i></a>
                 </div>
                 
             </div>

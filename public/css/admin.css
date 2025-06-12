@@ -193,8 +193,6 @@ header{
     background-color: #B4D6BE;
 
 }
-
-
 .comprar p
 {
     width: 100%;
@@ -206,5 +204,13 @@ header{
     width: 45%;
     height: 100%;
 }
+.small-box .inner h3,
+.small-box .inner p {
+    white-space: normal; /* permite saltos de línea */
+    word-break: break-word; /* rompe palabras largas */
+    overflow-wrap: break-word; /* también para compatibilidad */
+    font-size: 1.2rem; /* puedes ajustar si es muy grande */
+}
+
 
 

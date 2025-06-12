@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="{{asset('css/admincolores.css')}}">
     <link rel="stylesheet" href="{{ asset('css/tablas.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-   
 @stop
 
 @section('content_header')
@@ -14,6 +13,11 @@
 @stop
 
 @section('content')
+
+<body>
+    
+
+</body>
 
     @if(session('success'))
         <div id="mensaje-exito" class="mensaje-exito">
@@ -46,9 +50,10 @@
         </button>
     </div>
 
+
     <!-- Tabla productos -->
     <div class="table-container">
-        <div class="table-responsive">
+        <div class="table-responsive" style="overflow-x: auto;">
             <table class="table table-bordered table-hover">
                 <thead class="thead-azul">
                     <tr>
@@ -56,7 +61,7 @@
                         <th width="15%">Nombre</th>
                         <th width="10%">Precio</th>
                         <th width="15%">Categoría</th>
-                        <th width="20%">Descripción</th>
+                        <th width="20%">Información</th>
                         <th width="10%">Acciones</th>
                     </tr>
                 </thead>
@@ -74,34 +79,47 @@
                                 </span>
                             </td>
                             <td class="descripcion-producto">
-                                <div><strong>Descripción:</strong><br>{{ Str::limit($producto->descripcion, 100) }}</div>
-                               
-                                 <div><strong>Ingredientes:</strong><br>
-                                    <ul>
-                                         @foreach(preg_split('/[\r\n|\r|\n,]+/', $producto->ingredientes) as $ingrediente)
-                                            @php
-                                                $ingrediente = preg_replace('/^[\s\.\-\:\•\·]+/', '', trim($ingrediente));
-                                            @endphp
-                                            @if($ingrediente !== '')
-                                                <li>{{ $ingrediente }}</li>
-                                            @endif
-                                        @endforeach
-                                    </ul>
+                                <div>
+                                    <strong>Descripción:</strong><br>
+                                    {{ Str::limit($producto->descripcion, 1000) }}
                                 </div>
 
-                                <div><strong>Modo de Uso:</strong><br>
-                                 
-                                    @foreach(preg_split('/[\r\n|\r|\n,]+/', $producto->modo_de_uso) as $modo)
-                                        @php
-                                            $modo = preg_replace('/^[\s\.\-\:\•\·]+/', '', trim($modo));
-                                        @endphp
-                                        @if($modo !== '')
-                                            <p>{{ $modo }}</p>
-                                        @endif
-                                    @endforeach
-                               </div>
+                                <!-- Botón Ver más actualizado -->
+                                <button class="btn-vermas" type="button" data-toggle="collapse" 
+                                    data-target="#infoProducto{{ $producto->id }}" aria-expanded="false"
+                                    aria-controls="infoProducto{{ $producto->id }}">
+                                    <span class="btn-text">Ver más</span>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
 
+                                <!-- Contenido oculto -->
+                                <div class="collapse mt-2" id="infoProducto{{ $producto->id }}">
+                                    <div><strong>Ingredientes:</strong><br>
+                                        <ul>
+                                            @foreach(preg_split('/[\r\n|\r|\n,]+/', $producto->ingredientes) as $ingrediente)
+                                                @php
+                                                    $ingrediente = preg_replace('/^[\s\.\-\:\•\·]+/', '', trim($ingrediente));
+                                                @endphp
+                                                @if($ingrediente !== '')
+                                                    <li>{{ $ingrediente }}</li>
+                                                @endif
+                                            @endforeach
+                                        </ul>
+                                    </div>
+
+                                    <div><strong>Modo de Uso:</strong><br>
+                                        @foreach(preg_split('/[\r\n|\r|\n,]+/', $producto->modo_de_uso) as $modo)
+                                            @php
+                                                $modo = preg_replace('/^[\s\.\-\:\•\·]+/', '', trim($modo));
+                                            @endphp
+                                            @if($modo !== '')
+                                                <p>{{ $modo }}</p>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
                             </td>
+
                             <td>
                                 <div class="btn-group-custom">
                                     <button type="button" class="btn btn-accion btn-editar" data-toggle="modal"
@@ -126,13 +144,13 @@
                             aria-labelledby="editarProductoModalLabel{{ $producto->id }}" aria-hidden="true">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
-                                    <form action="{{ route('productos.update', $producto) }}" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ route('productos.update', $producto) }}" method="POST" enctype="multipart/form-data" style = "display: none;">
                                         @csrf
                                         @method('PUT')
 
                                         <div class="modal-header">
                                             <h5 class="modal-title">
-                                                <i class="fas fa-edit mr-2"></i>Editar Producto
+                                                <i class="fas fa-edit"></i>Editar Producto
                                             </h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                                                 <span aria-hidden="true">&times;</span>
@@ -205,9 +223,7 @@
                                                 </div>
                                             </div>
 
-
                                         </div>
-
 
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-cancelar" data-dismiss="modal">Cancelar</button>

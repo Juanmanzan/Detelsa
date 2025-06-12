@@ -41,7 +41,7 @@
                 
                 <div class="product-content">
                     <h3 class="product-name">{{ $producto->nombre }}</h3>
-                    <p class="product-description">{{ Str::limit($producto->descripcion, 80) }}</p>
+                    <p class="product-description">{{ Str::limit($producto->descripcion, 200) }}</p>
                     <div class="product-price">${{ number_format($producto->precio, 2) }}</div>
                     
                     <div class="product-actions">

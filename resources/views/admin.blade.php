@@ -13,66 +13,61 @@
 @stop
 
 @section('content')
-<div class="container-fluid">
-    <!-- Estadísticas principales -->
-    <div class="row mb-4">
-        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-            <div class="small-box bg-info shadow-sm">
-                <div class="inner">
-                    <h3>{{ $ordenesHoy }}</h3>
-                    <p>Órdenes de Hoy</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-shopping-cart"></i>
-                </div>
-                
-            </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-            <div class="small-box bg-success shadow-sm">
-                <div class="inner">
-                    <h3>${{ number_format($ventasTotales, 2) }}</h3>
-                    <p>Ventas Totales</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
- 
-            </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <div class="small-box bg-warning shadow-sm">
-                <div class="inner text-white">
-                    <h3 data-toggle="tooltip" title="{{ $productoNombre }}">
-                        {{ Str::limit($productoNombre, 50) }}
-                         <small class="text-muted">({{ $productoCantidad }})</small>
-                    </h3>
-                    <p>Producto Más Vendido</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-crown"></i>
-                </div>
-                @if($productoId)
-                  
-                @else
-                    <span class="small-box-footer">No disponible</span>
-                @endif
-            </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-6">
-            <div class="small-box bg-danger shadow-sm">
-                <div class="inner">
-                    <h3>{{ $promocionesActivas }}</h3>
-                    <p>Promociones Activas</p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-percent"></i>
-                </div>
 
+<div class="container-fluid mt-4">
+        <div class="row mb-4">
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
+                <div class="small-box bg-info shadow-sm text-white">
+                    <div class="inner">
+                        <h3>{{ $ordenesHoy }}</h3>
+                        <p>Órdenes de Hoy</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </div>
             </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
+                <div class="small-box bg-success shadow-sm text-white">
+                    <div class="inner">
+                        <h3>${{ number_format($ventasTotales, 2) }}</h3>
+                        <p>Ventas Totales</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
+                <div class="small-box bg-warning shadow-sm text-white">
+                    <div class="inner">
+                        <h3 title="{{ $productoNombre }}">
+                            {{ Str::limit($productoNombre, 50) }}
+                            <small class="text-muted">({{ $productoCantidad }})</small>
+                        </h3>
+                        <p>Producto Más Vendido</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
+                <div class="small-box bg-danger shadow-sm text-white">
+                    <div class="inner">
+                        <h3>{{ $promocionesActivas }}</h3>
+                        <p>Promociones Activas</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-percent"></i>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -239,6 +234,13 @@
         border-radius: 10px;
         transition: all 0.3s ease;
         overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 180px; /* Puedes ajustar este valor según convenga */
+        padding: 20px;
+        border-radius: 8px;
+        color: white;
     }
     .small-box:hover {
         transform: translateY(-5px);

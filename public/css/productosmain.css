@@ -1,6 +1,6 @@
 
         :root {
-            --primary: #198754;
+            --primary: #2C8CD8;
             --primary-dark: #0d6e3f;
             --secondary: #f8f9fa;
             --accent: #ffc107;
@@ -41,7 +41,7 @@
         
         .search-form {
             position: relative;
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
         }
         
@@ -161,6 +161,7 @@
             margin-bottom: 1.2rem;
             position: relative;
             display: inline-block;
+            margin-left: 10%;
         }
         
         .footer h5::after {
@@ -177,11 +178,14 @@
         .footer p {
             line-height: 1.8;
             opacity: 0.9;
+            text-align: justify;
+
         }
         
         .footer ul {
             padding-left: 0;
             list-style: none;
+            margin-left: 10%;
         }
         
         .footer ul li {
@@ -198,7 +202,10 @@
             display: flex;
             gap: 15px;
             margin-top: 20px;
+            margin-left: 10%;
         }
+
+      
         
         .social-link {
             display: flex;
@@ -269,6 +276,8 @@
             font-weight: 600;
             color: var(--primary);
         }
+
+        
         
         /* Responsive Adjustments */
         @media (max-width: 991px) {
@@ -279,16 +288,24 @@
             .nav-btn {
                 width: 100%;
                 margin-bottom: 8px;
+                margin-top: 8px;
             }
             
             .search-form {
-                margin-bottom: 15px;
+                margin-bottom: 17px;
+                width: 100%;
             }
         }
         
         @media (max-width: 767px) {
             .footer .col-md-4 {
                 margin-bottom: 30px;
+                text-align: justify;
+                
+            }
+            .etiquetas
+            {
+                justify-items: center;
             }
             
             .footer h5::after {
@@ -304,5 +321,20 @@
             .footer ul, .footer .social-links, .footer .newsletter-form {
                 justify-content: center;
             }
+
+            .footer ul {
+    list-style: none; /* Quita los puntos si los hay */
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea todos los <li> al mismo punto a la izquierda */
+    width: fit-content; /* Para que el ul no ocupe todo el ancho si no es necesario */
+}
+
+.footer ul li {
+    margin-left: 0; /* Quita cualquier indentación */
+    padding-left: 0;
+}
         }
   
