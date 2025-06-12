@@ -44,22 +44,55 @@
                 <div class="product-details-content" id="product-details-content">
                     <div class="details-section">
                         <h4 class="details-title">Ingredientes</h4>
-                        <ul class="ingredients-list">
-                            @foreach(preg_split('/\r\n|\r|\n/', $producto->ingredientes) as $ingrediente)
-                                @php
-                                    $ingrediente = preg_replace('/^[\s\.\-\:\•\·]+/', '', trim($ingrediente));
-                                @endphp
-                                @if($ingrediente !== '')
-                                    <li>{{ $ingrediente }}</li>
-                                @endif
-                            @endforeach
-                        </ul>
+                        @php
+                            $ingredientes = array_filter(
+                                preg_split('/\r\n|\r|\n/', $producto->ingredientes ?? ''),
+                                function($ingrediente) {
+                                    return trim($ingrediente) !== '';
+                                }
+                            );
+                        @endphp
+
+                        @if(count($ingredientes) > 0)
+                            <ul class="ingredients-list">
+                                @foreach($ingredientes as $ingrediente)
+                                    @php
+                                        $ingrediente = preg_replace('/^[\s\.\-\:\•\·]+/', '', trim($ingrediente));
+                                    @endphp
+                                    @if($ingrediente !== '')
+                                        <li>{{ $ingrediente }}</li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        @else
+                            <p>No se especificaron ingredientes para este producto.</p>
+                        @endif
                     </div>
                     
                     <div class="details-section">
                         <h4 class="details-title">Modo de uso</h4>
-                        <p>{{ $producto->modo_de_uso }}</p>
+
+                        @php
+                            // Separar el texto en líneas o elementos
+                            $modos = array_filter(preg_split('/[\r\n|\r|\n,]+/', $producto->modo_de_uso ?? ''), function($modo) {
+                                return trim($modo) !== '';
+                            });
+                        @endphp
+
+                        @if(count($modos) > 0)
+                            @foreach($modos as $modo)
+                                @php
+                                    $modo = preg_replace('/^[\s\.\-\:\•\·]+/', '', trim($modo));
+                                @endphp
+                                @if($modo !== '')
+                                    <p>{{ $modo }}</p>
+                                @endif
+                            @endforeach
+                        @else
+                            <p>No existe una descripción para este producto.</p>
+                        @endif
                     </div>
+
                 </div>
             </div>
         </div>
