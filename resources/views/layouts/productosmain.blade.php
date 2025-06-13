@@ -137,7 +137,7 @@
             <div class="col-md-4 mb-4 mb-md-0">
                 <h5>Encuéntranos</h5>
                 <ul class = "etiquetas">
-                    <li><i class="fas fa-map-marker-alt"></i> Riobamba Ecuador</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Guano Ecuador</li>
                     <li><i class="fas fa-phone"></i>+593 98 262 1340</li>
                     <li><i class="fas fa-envelope"></i> <a href="mailto:detelsa445@gmail.com" class="text-white">detelsa445@gmail.com</a></li>
                     <li><i class="fas fa-clock"></i> Lunes a Viernes: 9:00 AM - 6:00 PM</li>

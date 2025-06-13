@@ -108,9 +108,9 @@
                                     </div>
 
                                     <div><strong>Modo de Uso:</strong><br>
-                                        @foreach(preg_split('/[\r\n|\r|\n,]+/', $producto->modo_de_uso) as $modo)
+                                        @foreach(preg_split('/[\r\n|\r]+/', $producto->modo_de_uso) as $modo)
                                             @php
-                                                $modo = preg_replace('/^[\s\.\-\:\•\·]+/', '', trim($modo));
+                                                $modo = preg_replace('/^[\s\-\:\•\·]+/', '', trim($modo));
                                             @endphp
                                             @if($modo !== '')
                                                 <p>{{ $modo }}</p>

@@ -15,10 +15,10 @@
 @section('content')
 
 <div class="container-fluid mt-4">
-        <div class="row mb-4">
+    <div class="row d-flex align-items-stretch">
 
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
-                <div class="small-box bg-info shadow-sm text-white">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4 d-flex">
+                <div class="small-box bg-info shadow-sm text-white w-100">
                     <div class="inner">
                         <h3>{{ $ordenesHoy }}</h3>
                         <p>Órdenes de Hoy</p>
@@ -29,8 +29,8 @@
                 </div>
             </div>
 
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
-                <div class="small-box bg-success shadow-sm text-white">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4 d-flex">
+                <div class="small-box bg-success shadow-sm text-white w-100">
                     <div class="inner">
                         <h3>${{ number_format($ventasTotales, 2) }}</h3>
                         <p>Ventas Totales</p>
@@ -41,13 +41,14 @@
                 </div>
             </div>
 
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
-                <div class="small-box bg-warning shadow-sm text-white">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4 d-flex">
+                <div class="small-box bg-warning shadow-sm text-white w-100">
                     <div class="inner">
                         <h3 title="{{ $productoNombre }}">
-                            {{ Str::limit($productoNombre, 50) }}
-                            <small class="text-muted">({{ $productoCantidad }})</small>
+                            {{ substr($productoNombre, 0, 25) }}<br>
+                            {{ substr($productoNombre, 25, 25) }}
                         </h3>
+                        <p class="text-muted m-0">Ventas: {{ $productoCantidad }}</p>
                         <p>Producto Más Vendido</p>
                     </div>
                     <div class="icon">
@@ -56,8 +57,8 @@
                 </div>
             </div>
 
-            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4">
-                <div class="small-box bg-danger shadow-sm text-white">
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 mb-4 d-flex">
+                <div class="small-box bg-danger shadow-sm text-white w-100">
                     <div class="inner">
                         <h3>{{ $promocionesActivas }}</h3>
                         <p>Promociones Activas</p>
@@ -67,9 +68,8 @@
                     </div>
                 </div>
             </div>
+</div>
 
-        </div>
-    </div>
 
     <!-- Gráficos y visualizaciones -->
     <div class="row">

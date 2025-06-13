@@ -57,7 +57,7 @@
                             <ul class="ingredients-list">
                                 @foreach($ingredientes as $ingrediente)
                                     @php
-                                        $ingrediente = preg_replace('/^[\s\.\-\:\•\·]+/', '', trim($ingrediente));
+                                        $ingrediente = preg_replace('/^[\s\-\:\•\·]+/', '', trim($ingrediente));
                                     @endphp
                                     @if($ingrediente !== '')
                                         <li>{{ $ingrediente }}</li>
@@ -68,13 +68,13 @@
                             <p>No se especificaron ingredientes para este producto.</p>
                         @endif
                     </div>
-                    
+        
                     <div class="details-section">
                         <h4 class="details-title">Modo de uso</h4>
 
                         @php
                             // Separar el texto en líneas o elementos
-                            $modos = array_filter(preg_split('/[\r\n|\r|\n,]+/', $producto->modo_de_uso ?? ''), function($modo) {
+                            $modos = array_filter(preg_split('/[\r\n|\r|]+/', $producto->modo_de_uso ?? ''), function($modo) {
                                 return trim($modo) !== '';
                             });
                         @endphp
